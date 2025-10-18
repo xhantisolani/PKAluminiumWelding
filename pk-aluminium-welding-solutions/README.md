@@ -18,18 +18,18 @@ Bright, modern aluminium welding & fabrication website. Frontend‑only, 7 pages
 
 ## ▶️ Run locally
 ```bash
-npm install
-npm run dev
+yarn install
+yarn dev
 ```
 
 Open the URL printed in your terminal (usually http://localhost:5173).
 
 ## 📦 Build
 ```bash
-npm run build
-npm run preview
+yarn build
+yarn preview
 ```
 
 ## 📝 Notes
-- Contact form is demo‑only (logs to console + toast). needs web3forms access key to receive submissions.
+- Contact form is demo‑only (logs to console + toast). add web3forms access key on /constants to receive submissions.
 - Replace demo images with your project photos in `src/assets/images` and update components accordingly.
