@@ -31,5 +31,5 @@ npm run preview
 ```
 
 ## 📝 Notes
-- Contact form is demo‑only (logs to console + toast). Wire it to your backend or a form service (e.g., Formspree, Netlify Forms) to receive submissions.
+- Contact form is demo‑only (logs to console + toast). needs web3forms access key to receive submissions.
 - Replace demo images with your project photos in `src/assets/images` and update components accordingly.
