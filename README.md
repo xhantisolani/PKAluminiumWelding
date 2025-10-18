@@ -18,16 +18,16 @@ Bright, modern aluminium welding & fabrication website. Frontend‑only, 7 pages
 
 ## ▶️ Run locally
 ```bash
-npm install
-npm run dev
+yarn install
+yarn dev
 ```
 
 Open the URL printed in your terminal (usually http://localhost:5173).
 
 ## 📦 Build
 ```bash
-npm run build
-npm run preview
+yarn build
+yarn preview
 ```
 
 ## 📝 Notes
