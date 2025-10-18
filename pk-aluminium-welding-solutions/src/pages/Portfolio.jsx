@@ -10,7 +10,7 @@ export default function Portfolio() {
       <Container maxW="7xl" py={16}>
         <Heading size="lg" mb={8}>Recent Projects</Heading>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
-          <ProjectCard image={demoImg} title="Patio Balustrade" desc="Powder‑coated aluminium with glass panels." />
+          <ProjectCard image={demoImg} title="Patio Balustrade" desc="Powder-coated aluminium with glass panels." />
           <ProjectCard image={demoImg} title="Custom Canopy" desc="Lightweight aluminium canopy for delivery fleet." />
           <ProjectCard image={demoImg} title="Minimal Table Frame" desc="Precision angles and smooth welds." />
         </SimpleGrid>

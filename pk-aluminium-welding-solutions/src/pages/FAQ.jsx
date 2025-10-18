@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Box, Container, Heading, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel } from '@chakra-ui/react'
 
 export default function FAQ() {
+  useEffect(() => { document.title = 'FAQ | PK Aluminium Welding Solutions' }, [])
   return (
     <Box>
       <Container maxW="4xl" py={16}>
@@ -11,7 +12,7 @@ export default function FAQ() {
             <h2>
               <AccordionButton>
                 <Box as="span" flex='1' textAlign='left'>
-                  Do you work on-site?
+                  Do you work on-site in Cape Town?
                 </Box>
                 <AccordionIcon />
               </AccordionButton>
@@ -20,7 +21,6 @@ export default function FAQ() {
               Yes. For installations and larger builds we schedule on-site work in the Cape Town area.
             </AccordionPanel>
           </AccordionItem>
-
           <AccordionItem>
             <h2>
               <AccordionButton>
@@ -31,10 +31,22 @@ export default function FAQ() {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              We specialize in aluminium for its strength-to-weight ratio and corrosion resistance. Steel options available on request.
+              We specialise in aluminium for its strength-to-weight ratio and corrosion resistance. Steel options available on request.
             </AccordionPanel>
           </AccordionItem>
-
+          <AccordionItem>
+            <h2>
+              <AccordionButton>
+                <Box as="span" flex='1' textAlign='left'>
+                  How long does a project take?
+                </Box>
+                <AccordionIcon />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel pb={4}>
+              Smaller items can be turned around within days. Custom canopies, gates or balustrades typically require a site visit, design approval and scheduled installation.
+            </AccordionPanel>
+          </AccordionItem>
           <AccordionItem>
             <h2>
               <AccordionButton>

@@ -1,17 +1,21 @@
 import React from 'react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import {
-  Box, Flex, HStack, IconButton, Link, useColorMode, useDisclosure, useColorModeValue, Stack, Button
+  Box, Flex, HStack, IconButton, Link, useColorMode, useDisclosure, useColorModeValue, Stack, Button, Tooltip
 } from '@chakra-ui/react'
 import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from '@chakra-ui/icons'
+import { COMPANY } from '../../utils/constants'
 
 const Links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/services', label: 'Services' },
+  { to: '/pricing', label: 'Pricing' },
+  { to: '/gallery', label: 'Gallery' },
+  { to: '/testimonials', label: 'Testimonials' },
   { to: '/portfolio', label: 'Portfolio' },
-  { to: '/contact', label: 'Contact' },
   { to: '/faq', label: 'FAQ' },
+  { to: '/contact', label: 'Contact' },
 ]
 
 function NavLink({ to, children }) {
@@ -60,7 +64,17 @@ export default function Navbar() {
         </HStack>
 
         <Flex alignItems={'center'} gap={2}>
-          <Button onClick={toggleColorMode} variant="ghost" aria-label="Toggle color mode">
+          <Tooltip label={`Call ${COMPANY.phone}`}>
+            <Button as="a" href={`tel:${COMPANY.phoneRaw}`} variant="ghost" size="sm">
+              Call
+            </Button>
+          </Tooltip>
+          <Tooltip label="Chat on WhatsApp">
+            <Button as="a" href={COMPANY.whatsappLink} target="_blank" rel="noreferrer" colorScheme="whatsapp" size="sm">
+              WhatsApp
+            </Button>
+          </Tooltip>
+          <Button onClick={toggleColorMode} variant="ghost" aria-label="Toggle color mode" size="sm">
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
           <Button as={RouterLink} to="/contact" colorScheme="teal" size="sm">Get a Quote</Button>
