@@ -55,7 +55,17 @@ export default function Navbar() {
           onClick={isOpen ? onClose : onOpen}
         />
         <HStack spacing={8} alignItems={'center'}>
-          <Box fontWeight="bold" fontSize="lg" color="teal.500">PK Aluminium Welding</Box>
+          <Link
+               as={RouterLink}
+               to="/"
+               fontWeight="bold"
+               fontSize="lg"
+               color="teal.500"
+               _hover={{ textDecoration: 'none', color: 'teal.600' }}
+              whiteSpace="nowrap"
+          >
+            PK Aluminium Welding
+         </Link>
           <HStack as={'nav'} spacing={2} display={{ base: 'none', md: 'flex' }}>
             {Links.map((link) => (
               <NavLink key={link.to} to={link.to}>{link.label}</NavLink>
