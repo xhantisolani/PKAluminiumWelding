@@ -1,6 +1,7 @@
 import React from 'react'
 import {
-  Box, Container, Heading, Text, SimpleGrid, Stack, Input, Textarea, Button, FormControl, FormLabel, FormErrorMessage, Select, useToast
+  Box, Container, Heading, Text, SimpleGrid, Stack, Input, Textarea, Button, FormControl, FormLabel, FormErrorMessage, Select, useToast,
+  Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { COMPANY, WEB3FORMS } from '../utils/constants'
@@ -90,6 +91,40 @@ export default function Contact() {
             </FormControl>
           </SimpleGrid>
           <Button colorScheme="teal" onClick={handleSubmit(onSubmit)} isLoading={isSubmitting}>Send Request</Button>
+
+          {/* Quick FAQs to support conversion */}
+          <Box pt={6}>
+            <Heading size="md" mb={3}>Quick FAQs</Heading>
+            <Accordion allowToggle reduceMotion>
+              <AccordionItem>
+                <h2>
+                  <AccordionButton _expanded={{ bg: 'gray.100' }}>
+                    <Box as="span" flex='1' textAlign='left'>How soon will I receive my quote?</Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>Most quotes are issued within 1–2 business days once we have measurements and photos.</AccordionPanel>
+              </AccordionItem>
+              <AccordionItem>
+                <h2>
+                  <AccordionButton _expanded={{ bg: 'gray.100' }}>
+                    <Box as="span" flex='1' textAlign='left'>Do you visit site before finalising?</Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>Yes. For installations we schedule a site visit in Cape Town to confirm dimensions and details.</AccordionPanel>
+              </AccordionItem>
+              <AccordionItem>
+                <h2>
+                  <AccordionButton _expanded={{ bg: 'gray.100' }}>
+                    <Box as="span" flex='1' textAlign='left'>What payment terms do you require?</Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>A deposit secures materials and production time; balance is due on completion or installation.</AccordionPanel>
+              </AccordionItem>
+            </Accordion>
+          </Box>
         </Stack>
       </Container>
     </Box>

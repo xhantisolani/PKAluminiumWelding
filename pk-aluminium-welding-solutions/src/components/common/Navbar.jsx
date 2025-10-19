@@ -1,105 +1,212 @@
-import React from 'react'
-import { Link as RouterLink, useLocation } from 'react-router-dom'
+import React from 'react';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
 import {
-  Box, Flex, HStack, IconButton, Link, useColorMode, useDisclosure, useColorModeValue, Stack, Button, Tooltip
-} from '@chakra-ui/react'
-import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from '@chakra-ui/icons'
-import { COMPANY } from '../../utils/constants'
+  Box,
+  Flex,
+  HStack,
+  IconButton,
+  Link,
+  useDisclosure,
+  useColorModeValue,
+  Stack,
+  Button,
+  Text,
+  Icon,
+} from '@chakra-ui/react';
+import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { motion } from 'framer-motion';
+import { FaPhoneAlt } from 'react-icons/fa';
 
+// Assuming COMPANY constants are defined elsewhere
+const COMPANY = {
+    phone: '021 555 1234',
+    phoneRaw: '+27215551234',
+    whatsappLink: 'https://wa.me/27821234567',
+};
+
+// --- Framer Motion Components ---
+const MotionBox = motion(Box);
+const MotionFlex = motion(Flex);
+const MotionLink = motion(Link);
+
+// --- Navigation Links ---
 const Links = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
   { to: '/services', label: 'Services' },
-  { to: '/pricing', label: 'Pricing' },
-  { to: '/gallery', label: 'Gallery' },
-  { to: '/testimonials', label: 'Testimonials' },
-  { to: '/portfolio', label: 'Portfolio' },
   { to: '/faq', label: 'FAQ' },
-  { to: '/contact', label: 'Contact' },
-]
+  { to: '/portfolio', label: 'Portfolio' },
+];
 
+// --- NavLink Component (Enhanced with Animation and Styling) ---
 function NavLink({ to, children }) {
-  const location = useLocation()
-  const active = location.pathname === to
-  const color = useColorModeValue(active ? 'teal.600' : 'gray.700', active ? 'teal.200' : 'gray.300')
+  const location = useLocation();
+  const isActive = location.pathname === to;
+  const linkColor = useColorModeValue('gray.600', 'gray.300');
+  const activeColor = useColorModeValue('blue.700', 'blue.300');
+  const underlineColor = useColorModeValue('blue.500', 'blue.400');
+
   return (
-    <Link
+    <MotionLink
       as={RouterLink}
       px={3}
       py={2}
-      rounded={'md'}
+      rounded={'sm'}
       to={to}
-      fontWeight={active ? 'bold' : 'medium'}
-      _hover={{ textDecoration: 'none', color: useColorModeValue('teal.700','teal.200') }}
-      color={color}
+      fontWeight={isActive ? 'bold' : 'medium'}
+      color={isActive ? activeColor : linkColor}
+      position="relative"
+      overflow="hidden"
+      whileHover={{ y: -2 }} 
+      transition={{ duration: 0.15 }}
+      _hover={{ textDecoration: 'none', color: activeColor }}
     >
       {children}
-    </Link>
-  )
+      {/* Animated Underline Indicator */}
+      {isActive && (
+        <MotionBox
+          position="absolute"
+          bottom="0"
+          left="0"
+          right="0"
+          h="2px"
+          bg={underlineColor}
+          layoutId="nav-underline"
+          transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+        />
+      )}
+    </MotionLink>
+  );
 }
 
+// --- Main Navbar Component ---
 export default function Navbar() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const { colorMode, toggleColorMode } = useColorMode()
-  const bg = useColorModeValue('white', 'gray.900')
-  const border = useColorModeValue('gray.100', 'gray.700')
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const bg = useColorModeValue('white', 'gray.900');
+  const border = useColorModeValue('gray.100', 'gray.700');
+  const accentColor = useColorModeValue('blue.600', 'blue.400');
+
+  const navbarVariants = {
+    initial: { y: -50, opacity: 0 },
+    animate: { y: 0, opacity: 1, transition: { type: 'spring', stiffness: 100, delay: 0.1 } },
+  };
 
   return (
-    <Box bg={bg} px={4} borderBottomWidth="1px" borderColor={border} position="sticky" top="0" zIndex="1000">
+    <MotionBox
+      bg={bg}
+      px={4}
+      borderBottomWidth="1px"
+      borderColor={border}
+      position="sticky"
+      top="0"
+      zIndex="1000"
+      shadow="md"
+      initial="initial"
+      animate="animate"
+      variants={navbarVariants}
+    >
       <Flex h={16} alignItems={'center'} justifyContent={'space-between'} maxW="7xl" mx="auto">
-        <IconButton
-          size={'md'}
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-          aria-label={'Open Menu'}
-          display={{ md: 'none' }}
-          onClick={isOpen ? onClose : onOpen}
-        />
-        <HStack spacing={8} alignItems={'center'}>
+        
+        {/* Left Side: Logo/Brand and Hamburger */}
+        {/* Use a fixed width on desktop to prevent shifting */}
+        <HStack 
+            spacing={8} 
+            alignItems={'center'}
+            w={{ base: 'auto', md: '200px' }} // Adjusted width for alignment
+            justifyContent={{ base: 'flex-start', md: 'flex-start' }}
+        >
+          <IconButton
+            size={'md'}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={'Open Menu'}
+            display={{ md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+            variant="ghost"
+          />
           <Link
-               as={RouterLink}
-               to="/"
-               fontWeight="bold"
-               fontSize="lg"
-               color="teal.500"
-               _hover={{ textDecoration: 'none', color: 'teal.600' }}
-              whiteSpace="nowrap"
+            as={RouterLink}
+            to="/"
+            fontWeight="extrabold"
+            fontSize="xl"
+            color={accentColor}
+            _hover={{ textDecoration: 'none', color: useColorModeValue('blue.700', 'blue.300') }}
+            whiteSpace="nowrap"
           >
-            PK Aluminium Welding
-         </Link>
-          <HStack as={'nav'} spacing={2} display={{ base: 'none', md: 'flex' }}>
-            {Links.map((link) => (
-              <NavLink key={link.to} to={link.to}>{link.label}</NavLink>
-            ))}
-          </HStack>
+            PK <Text as="span" display={{ base: 'inline', sm: 'inline' }}>Aluminium</Text>
+          </Link>
         </HStack>
 
-        <Flex alignItems={'center'} gap={2}>
-          <Tooltip label={`Call ${COMPANY.phone}`}>
-            <Button as="a" href={`tel:${COMPANY.phoneRaw}`} variant="ghost" size="sm">
-              Call
-            </Button>
-          </Tooltip>
-          <Tooltip label="Chat on WhatsApp">
-            <Button as="a" href={COMPANY.whatsappLink} target="_blank" rel="noreferrer" colorScheme="whatsapp" size="sm">
-              WhatsApp
-            </Button>
-          </Tooltip>
-          <Button onClick={toggleColorMode} variant="ghost" aria-label="Toggle color mode" size="sm">
-            {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+        {/* Center: Desktop Navigation Links (NEW ALIGNMENT) */}
+        <HStack 
+            as={'nav'} 
+            spacing={4} 
+            display={{ base: 'none', md: 'flex' }} 
+            flex="1" // Takes up remaining space
+            justifyContent="center" // CENTERS the links within this available space
+        >
+            {Links.map((link) => (
+                <NavLink key={link.to} to={link.to}>
+                    {link.label}
+                </NavLink>
+            ))}
+        </HStack>
+
+        {/* Right Side: Call-to-Action Buttons */}
+        {/* Use a fixed width on desktop to match the left side's width for perfect centering */}
+        <Flex 
+            alignItems={'center'} 
+            gap={3}
+            w={{ base: 'auto', md: '200px' }} // Adjusted width for alignment
+            justifyContent={{ base: 'flex-end', md: 'flex-end' }}
+        >
+          {/* Primary CTA (Call) - Minimalist Button */}
+          <Button
+            as="a"
+            href={`tel:${COMPANY.phoneRaw}`}
+            variant="ghost"
+            size="md"
+            display={{ base: 'none', sm: 'flex' }}
+            leftIcon={<Icon as={FaPhoneAlt} w={4} h={4} color={accentColor} />}
+            color={accentColor}
+            _hover={{ bg: useColorModeValue('gray.100', 'gray.700'), transform: 'translateY(-1px)' }}
+          >
+            Call Now
           </Button>
-          <Button as={RouterLink} to="/contact" colorScheme="teal" size="sm">Get a Quote</Button>
+
+          {/* Secondary CTA (Quote) - Highlighted Button */}
+          <Button
+            as={RouterLink}
+            to="/contact"
+            colorScheme="blue"
+            size="md"
+            whileHover={{ scale: 1.05, boxShadow: "0 4px 12px rgba(66, 153, 225, 0.5)" }}
+            transition={{ duration: 0.2 }}
+          >
+            Quote
+          </Button>
         </Flex>
       </Flex>
 
+      {/* Mobile Menu (Animated Collapse) */}
+      {/* The main content won't shift because the mobile menu is rendered *inside* the sticky nav bar */}
       {isOpen ? (
-        <Box pb={4} display={{ md: 'none' }}>
-          <Stack as={'nav'} spacing={2}>
+        <MotionBox
+          pb={4}
+          display={{ md: 'none' }}
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Stack as={'nav'} spacing={1}>
             {Links.map((link) => (
-              <NavLink key={link.to} to={link.to}>{link.label}</NavLink>
+              <NavLink key={link.to} to={link.to}>
+                {link.label}
+              </NavLink>
             ))}
           </Stack>
-        </Box>
+        </MotionBox>
       ) : null}
-    </Box>
-  )
+    </MotionBox>
+  );
 }

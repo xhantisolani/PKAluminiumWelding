@@ -6,17 +6,18 @@ const config = {
 }
 
 const colors = {
+  // Bright, precise blue for accents and CTAs
   brand: {
-    50: '#e6fffb',
-    100: '#b2f5ea',
-    200: '#81e6d9',
-    300: '#4fd1c5',
-    400: '#38b2ac',
-    500: '#319795',
-    600: '#2c7a7b',
-    700: '#285e61',
-    800: '#234e52',
-    900: '#1d4044',
+    50: '#e6f6ff',
+    100: '#cceaff',
+    200: '#99d5ff',
+    300: '#66c0ff',
+    400: '#33abff',
+    500: '#0d98ff', // primary accent
+    600: '#0a7ad1',
+    700: '#085ea3',
+    800: '#064575',
+    900: '#042e4d',
   },
 }
 
@@ -32,6 +33,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
+        // Light, clean backdrop to contrast charcoal surfaces
         bg: 'gray.50',
       },
     },
