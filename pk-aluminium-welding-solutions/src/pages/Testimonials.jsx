@@ -4,9 +4,9 @@ import { Box, Container, Heading, Text, SimpleGrid, Stack } from '@chakra-ui/rea
 function Testimonial({ quote, name, project }) {
   return (
     <Box borderWidth="1px" rounded="xl" p={6} bg="white" shadow="sm">
-      <Text fontStyle="italic" mb={3}>"{quote}"</Text>
-      <Stack spacing={0}>
-        <Text fontWeight="bold">{name}</Text>
+      <Text fontStyle="italic" mb={3} color="gray.600">"{quote}"</Text>
+      <Stack spacing={0} >
+        <Text fontWeight="bold" color="gray.900">{name}</Text>
         <Text color="gray.600">{project}</Text>
       </Stack>
     </Box>
@@ -18,7 +18,7 @@ export default function Testimonials() {
   return (
     <Box>
       <Container maxW="6xl" py={16}>
-        <Heading size="lg" mb={3}>Client Testimonials</Heading>
+        <Heading size="lg" mb={3} color="gray.900">Client Testimonials</Heading>
         <Text mb={8} color="gray.600">
           We take pride in precision and communication — from first quote to final install.
         </Text>

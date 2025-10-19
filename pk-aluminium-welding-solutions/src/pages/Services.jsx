@@ -8,7 +8,7 @@ export default function Services() {
   return (
     <Box>
       <Container maxW="7xl" py={16}>
-        <Heading size="lg" mb={4}>Aluminium Welding & Fabrication Services – Cape Town</Heading>
+        <Heading size="lg" mb={4} color="gray.900">Aluminium Welding & Fabrication Services — Cape Town</Heading>
         <Text mb={8} color="gray.600">
           We fabricate and install aluminium solutions designed for the Western Cape climate — corrosion-resistant, lightweight,
           and finished to a high standard.

@@ -7,7 +7,7 @@ export default function About() {
   return (
     <Box>
       <Container maxW="3xl" py={16}>
-        <Stack spacing={4}>
+        <Stack spacing={4} color="gray.900">
           <Heading>About PK Aluminium Welding Solutions</Heading>
           <Text fontSize="lg">
             Based in Maitland, Cape Town, we specialise in aluminium welding and fabrication with a focus on

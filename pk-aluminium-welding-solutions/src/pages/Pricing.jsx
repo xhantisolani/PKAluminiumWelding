@@ -4,7 +4,7 @@ import { Box, Container, Heading, Text, SimpleGrid, Stack, Badge } from '@chakra
 function PriceCard({ title, points }) {
   return (
     <Box borderWidth="1px" rounded="xl" p={6} bg="white" shadow="sm">
-      <Heading size="md" mb={3}>{title}</Heading>
+      <Heading size="md" mb={3} color="gray.900">{title}</Heading>
       <Stack spacing={2}>
         {points.map((p, i) => <Text key={i} color="gray.700">• {p}</Text>)}
       </Stack>
@@ -17,7 +17,7 @@ export default function Pricing() {
   return (
     <Box>
       <Container maxW="6xl" py={16}>
-        <Heading size="lg" mb={3}>Pricing Guide</Heading>
+        <Heading size="lg" mb={3} color="gray.900">Pricing Guide</Heading>
         <Text mb={8} color="gray.600">
           Every project is unique, so we provide tailored quotes based on design, dimensions, materials, finish (e.g. powder coat) and site conditions.
           Use this guide to understand typical factors that influence pricing.

@@ -5,7 +5,7 @@ export default function FAQ() {
   useEffect(() => { document.title = 'FAQ | PK Aluminium Welding Solutions' }, [])
   return (
     <Box>
-      <Container maxW="4xl" py={16}>
+      <Container maxW="4xl" py={16} color="gray.900">
         <Heading size="lg" mb={6}>Frequently Asked Questions</Heading>
         <Accordion allowToggle>
           <AccordionItem>

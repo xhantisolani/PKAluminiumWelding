@@ -11,7 +11,7 @@ export default function Gallery() {
   return (
     <Box>
       <Container maxW="7xl" py={16}>
-        <Heading size="lg" mb={8}>Gallery</Heading>
+        <Heading size="lg" mb={8} color="gray.900">Gallery</Heading>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
           <ProjectCard image={img1} title="Patio Balustrade" desc="Powder-coated aluminium with glass panels." />
           <ProjectCard image={img2} title="Custom Canopy" desc="Lightweight aluminium canopy for delivery fleet." />
