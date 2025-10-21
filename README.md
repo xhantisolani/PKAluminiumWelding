@@ -18,8 +18,9 @@ Bright, modern aluminium welding & fabrication website. Frontend‑only, 7 pages
 
 ## ▶️ Run locally
 ```bash
-yarn install
-yarn dev
+~ cd pk-aluminium-welding-solutions (or cd pk (tab button + enter button)
+~ yarn install
+~ yarn dev
 ```
 
 Open the URL printed in your terminal (usually http://localhost:5173).
