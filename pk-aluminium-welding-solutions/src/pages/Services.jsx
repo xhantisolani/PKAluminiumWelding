@@ -33,11 +33,11 @@ import {
 
 import ServiceCard from '../components/common/ServiceCard' // Assumes the updated ServiceCard is in place
 
-// Custom Motion Components
-const MotionBox = motion(Box)
-const MotionHeading = motion(Heading)
-const MotionText = motion(Text)
-const MotionImage = motion(Image)
+// Custom Motion Components (FIXED DEPRECATION)
+const MotionBox = motion.create(Box) // FIX applied
+const MotionHeading = motion.create(Heading) // FIX applied
+const MotionText = motion.create(Text) // FIX applied
+const MotionImage = motion.create(Image) // FIX applied
 
 // Data for the main service categories
 const mainServices = [
@@ -90,30 +90,30 @@ export default function Services() {
       {/* 1. HERO SECTION: Dynamic & Detailed */}
       {/* ------------------------------------- */}
       <Box 
-        bg="gray.800" 
-        py={{ base: 20, md: 32 }} 
-        color="white"
-        position="relative" 
-        overflow="hidden" 
-        minH={{ base: '300px', md: '450px' }}
-      >
-        {/* Background Image Container */}
-        <Box
-          aria-hidden
-          position="absolute"
-          inset={0}
-          bgImage="url(/glass-aluminium.webp)" // IMAGE 1
-          bgPos="center"
-          bgSize="cover"
-          bgAttachment="fixed" 
-          // Dark Overlay for readability
-          _after={{
-            content: '""',
-            position: 'absolute',
-            inset: 0,
-            bgGradient: 'linear(to-b, blackAlpha.600, blackAlpha.800)', 
-          }}
-        />
+        bg="gray.800" 
+        py={{ base: 20, md: 32 }} 
+        color="white"
+        position="relative" 
+        overflow="hidden" 
+        minH={{ base: '300px', md: '450px' }}
+      >
+        {/* Background Image Container */}
+        <Box
+          aria-hidden
+          position="absolute"
+          inset={0}
+          bgImage="url(/glass-aluminium.webp)" // IMAGE 1
+          bgPos="center"
+          bgSize="cover"
+          bgAttachment="fixed" 
+          // Dark Overlay for readability
+          _after={{
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            bgGradient: 'linear(to-b, blackAlpha.600, blackAlpha.800)', 
+          }}
+        />
 
         <Container maxW="7xl" position="relative" zIndex="2">
           <MotionHeading
@@ -179,8 +179,8 @@ export default function Services() {
                   <Text color="gray.600">
                     {service.desc}
                   </Text>
-                  <Button variant="link" colorScheme="blue" rightIcon={<FaArrowRight />} size="sm" as={RouterLink} to="/portfolio">
-                    View Gallery
+                  <Button variant="link" colorScheme="blue" rightIcon={<FaArrowRight />} size="sm" as={RouterLink} to="/Contact">
+                    Get in Touch
                   </Button>
                 </VStack>
               </HStack>

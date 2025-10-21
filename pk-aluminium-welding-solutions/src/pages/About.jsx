@@ -18,11 +18,11 @@ import { FaHistory, FaBullseye, FaHandshake, FaToolbox, FaUserTie } from 'react-
 // Assuming COMPANY and a placeholder for team members is available
 // import { COMPANY } from '../utils/constants' 
 
-// --- Custom Motion Components ---
-const MotionBox = motion(Box)
-const MotionHeading = motion(Heading)
-const MotionText = motion(Text)
-const MotionImage = motion(Image)
+// --- Custom Motion Components (FIXED DEPRECATION) ---
+const MotionBox = motion.create(Box) // FIX applied
+const MotionHeading = motion.create(Heading) // FIX applied
+const MotionText = motion.create(Text) // FIX applied
+const MotionImage = motion.create(Image) // FIX applied
 
 // --- Utility Components for the About Page ---
 
@@ -86,23 +86,23 @@ export default function About() {
         overflow="hidden"
         minH={{ base: '300px', md: '400px' }} 
       >
-        {/* Background Image Container */}
-        <Box
-          aria-hidden
-          position="absolute"
-          inset={0}
-          bgImage="url(/welding.webp)" 
-          bgPos="center"
-          bgSize="cover"
-          bgAttachment="fixed" 
-          // Dark Overlay to Ensure Text Readability (Accessibility)
-          _after={{
-            content: '""',
-            position: 'absolute',
-            inset: 0,
-            bgGradient: 'linear(to-b, blackAlpha.700, blackAlpha.800, blackAlpha.900)', 
-          }}
-        />
+        {/* Background Image Container */}
+        <Box
+          aria-hidden
+          position="absolute"
+          inset={0}
+          bgImage="url(/welding.webp)" 
+          bgPos="center"
+          bgSize="cover"
+          bgAttachment="fixed" 
+          // Dark Overlay to Ensure Text Readability (Accessibility)
+          _after={{
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            bgGradient: 'linear(to-b, blackAlpha.700, blackAlpha.800, blackAlpha.900)', 
+          }}
+        />
 
         <Container maxW="6xl" zIndex="2" position="relative">
           <MotionHeading
@@ -300,57 +300,7 @@ export default function About() {
 
       <Divider />
 
-      {/* ## MEET THE TEAM / LEADERSHIP */}
-{/*       <Box bg="gray.100" py={{ base: 16, md: 24 }}>
-        <Container maxW="6xl">
-          <MotionHeading
-            textAlign="center"
-            mb={12}
-            color="gray.700"
-            size="2xl"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            The PK Aluminium Leadership
-          </MotionHeading>
-          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-            {teamMembers.map((member, i) => (
-              <MotionBox
-                key={i}
-                bg="white"
-                rounded="2xl"
-                shadow="xl"
-                textAlign="center"
-                overflow="hidden"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ translateY: -5, boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.6, delay: i * 0.15 }}
-              >
-                <Image src={member.img} alt={member.name} h="300px" w="full" objectFit="cover" filter="grayscale(20%)" />
-                <Box p={6}>
-                  <Heading size="lg" color={accentColor} mb={1}>
-                    {member.name}
-                  </Heading>
-                  <Text fontWeight="bold" color="gray.600" mb={3}>
-                    {member.title}
-                  </Text>
-                  <Text fontSize="sm" color="gray.500">
-                    {member.bio}
-                  </Text>
-                </Box>
-              </MotionBox>
-            ))}
-          </SimpleGrid>
-        </Container>
-      </Box> */}
-
-      {/* ------------------------------------- */}
       {/* ## CTA SECTION: Trust Builder */}
-      {/* ------------------------------------- */}
       <Box bg="blue.700" color="white" py={20} textAlign="center">
         <MotionHeading
           size="2xl"
