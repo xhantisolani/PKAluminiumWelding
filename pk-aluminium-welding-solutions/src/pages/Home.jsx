@@ -24,7 +24,7 @@ import {
     FaArrowRight, 
     FaRulerCombined, 
     FaWarehouse, 
-    FaHandsHelping, // Replaced FaBolt with FaHandsHelping for service
+    FaHandsHelping, 
     FaQuoteLeft,
     FaRegQuestionCircle,
     FaAward // New icon for 'Why Choose Us'
@@ -127,7 +127,7 @@ export default function Home() {
                 {/* Right: Image */}
                 <MotionBox initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7 }}>
                     <Image
-                        src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1200&auto=format&fit=crop" // Professional, clean workshop or team shot
+                        src="/welding.webp" // Professional, clean workshop or team shot
                         alt="PK Aluminium Workshop Team"
                         rounded="xl"
                         shadow="2xl"

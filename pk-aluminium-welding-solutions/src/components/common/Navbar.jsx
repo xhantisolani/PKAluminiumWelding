@@ -35,8 +35,7 @@ const Links = [
   { to: '/about', label: 'About' },
   { to: '/services', label: 'Services' },
   { to: '/faq', label: 'FAQ' },
-  { to: '/portfolio', label: 'Portfolio' },
-];
+  { to: '/contact', label: 'Contact' },];
 
 // --- NavLink Component (Enhanced with Animation and Styling) ---
 function NavLink({ to, children }) {
