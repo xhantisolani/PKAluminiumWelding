@@ -207,7 +207,7 @@ export default function Services() {
                 The PK Aluminium Technical Edge
               </Heading>
               <Text fontSize="lg" mb={8} color="gray.600">
-                Aluminium demands specialized techniques. We invest in top-tier equipment and continuous training to ensure our structures are not just strong, but **visually flawless** and designed for South African conditions.
+                Aluminium demands specialized techniques. We invest in top-tier equipment and continuous training to ensure our structures are not just strong, but <strong>visually flawless</strong> and designed for South African conditions.
               </Text>
 
               <VStack spacing={6} align="start">
@@ -269,7 +269,7 @@ export default function Services() {
               Seamless Aluminium & Glass Integration
             </Heading>
             <Text fontSize="lg" mb={6} color="gray.600">
-              Modern architecture frequently requires lightweight frames that pair perfectly with large glass panels. Our expertise ensures **structural integrity and flawless aesthetics** for:
+              Modern architecture frequently requires lightweight frames that pair perfectly with large glass panels. Our expertise ensures <strong>structural integrity and flawless aesthetics</strong> for:
             </Text>
             <VStack align="start" spacing={3} color="gray.700">
               <HStack><Icon as={FaArrowRight} w={4} h={4} color={accentColor} /> <Text fontWeight="semibold">Frameless & Framed Glass Balustrades</Text></HStack>

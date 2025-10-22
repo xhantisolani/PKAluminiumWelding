@@ -110,7 +110,7 @@ export default function Home() {
                         Our Commitment to Craftsmanship
                     </Heading>
                     <Text fontSize="lg" mb={6} color={useColorModeValue('gray.700', 'gray.300')}>
-                        We are a locally owned and operated fabrication workshop based in **Maitland**, serving the entire Cape Town area. Our passion lies in translating complex architectural blueprints into durable, low-maintenance aluminium realities. From initial sketch to final installation, we manage the entire process with meticulous care. We pride ourselves on transparent communication and reliable project timelines.
+                        We are a locally owned and operated fabrication workshop based in <strong>Maitland</strong>, serving the entire Cape Town area. Our passion lies in translating complex architectural blueprints into durable, low-maintenance aluminium realities. From initial sketch to final installation, we manage the entire process with meticulous care. We pride ourselves on transparent communication and reliable project timelines.
                     </Text>
                     <Button 
                         as={RouterLink} 
@@ -171,7 +171,7 @@ export default function Home() {
                     <Icon as={FaAward} boxSize={10} color={accentColor} />
                     <Heading size="lg">Why PK Aluminium?</Heading>
                     <Text fontSize="lg" color={useColorModeValue('gray.700', 'gray.300')}>
-                        We are not just welders; we are **fabrication problem-solvers**. Our specialized focus on aluminium ensures expertise and quality far beyond general metalwork shops.
+                        We are not just welders; we are <strong>fabrication problem-solvers</strong>. Our specialized focus on aluminium ensures expertise and quality far beyond general metalwork shops.
                     </Text>
                 </Stack>
                 <VStack align="start" spacing={4}>
