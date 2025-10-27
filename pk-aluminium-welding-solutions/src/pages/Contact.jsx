@@ -13,7 +13,6 @@ import {
   FormLabel,
   FormErrorMessage,
   Select,
-  // useToast is no longer needed
   Accordion,
   AccordionItem,
   AccordionButton,
@@ -26,9 +25,11 @@ import {
   Link,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import Swal from 'sweetalert2'; // ⬅️ SweetAlert2 Import
+import Swal from 'sweetalert2'; 
 import { FaPhoneAlt, FaEnvelope, FaWhatsapp, FaMapMarkerAlt } from 'react-icons/fa'
 
+// Import the SEO component
+import SeoHead from '../components/common/SeoHead' 
 
 // --- Placeholder Constants for demo ---
 const COMPANY = {
@@ -37,33 +38,37 @@ const COMPANY = {
     phoneRaw: '+27215551234',
     email: 'info@pk-aluminium.co.za',
     whatsappLink: 'https://wa.me/27215551234',
-    // Using a generic Google Maps embed URL for Maitland as a placeholder
-    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13239.389279093788!2d18.49070966977539!3d-33.916773300000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5b0257e174b5%3A0x6b4507567798c11e!2sMaitland%2C%20Cape%20Town!5e0!3m2!1sen!2sza!4v1689254400000!5m2!1sen!2sza",
+    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2763.1994334795254!2d18.4798245750774!3d-33.923984421918135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5c569519b589%3A0xf5ca173f80b32347!2s4%20Benes%20St%2C%20Maitland%2C%20Cape%20Town%2C%207405!5e1!3m2!1sen!2sza!4v1761575977342!5m2!1sen!2sza",
 };
 const WEB3FORMS = {
-    ACCESS_KEY: 'a1698cc1-5c48-4c17-839f-c238d380b738', // Replace with actual key
+    ACCESS_KEY: 'a1698cc1-5c48-4c17-839f-c238d380b738', 
 };
 
 
 export default function Contact() {
   const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm()
-  // const toast = useToast() is removed
-  const accentColor = useColorModeValue('teal.500', 'teal.300');
+  // --- CHANGE 1: Switched 'teal' to 'blue' for the accent color ---
+  const accentColor = useColorModeValue('blue.600', 'blue.300'); 
   const cardBg = useColorModeValue('white', 'gray.700');
   const mapBorderColor = useColorModeValue('gray.200', 'gray.600');
 
+    // --- SEO Metadata for the Contact Page ---
+    const seoTitle = "Contact PK Aluminium | Request a Quote in Cape Town (Maitland)";
+    const seoDescription = "Get a fast, free quote for custom aluminium welding and fabrication in Cape Town. Contact our Maitland workshop via form, phone, or WhatsApp today.";
+
+
   const onSubmit = async (formValues) => {
     // 1. SHOW PROCESSING ALERT
-    Swal.fire({
-        title: 'Sending Quote Request...',
-        text: 'Please wait while we process your submission.',
-        icon: 'info',
-        showConfirmButton: false,
-        allowOutsideClick: false,
-        didOpen: () => {
-            Swal.showLoading();
-        }
-    });
+    Swal.fire({
+        title: 'Sending Quote Request...',
+        text: 'Please wait while we process your submission.',
+        icon: 'info',
+        showConfirmButton: false,
+        allowOutsideClick: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
 
     // Compile a detailed message for the submission email
     const fullMessage = `
@@ -99,19 +104,19 @@ Message: ${formValues.message || 'N/A'}
       
       if (data && (data.success || res.ok)) {
         // 2. UPDATE TO SUCCESS ALERT
-        Swal.update({
-            icon: 'success',
-            title: `Thank You, ${formValues.name}!`,
-            html: `
-                <p>We've successfully received your quote request for **${formValues.service}**.</p>
-                <p>A specialist will review the details and get back to you with a preliminary estimate within **1–2 business days**.</p>
-                <br>
-                <p>For urgent inquiries, please contact us via WhatsApp.</p>
-            `,
-            showConfirmButton: true,
-            confirmButtonText: 'Got it!',
-            allowOutsideClick: true,
-        });
+        Swal.update({
+            icon: 'success',
+            title: `Thank You, ${formValues.name}!`,
+            html: `
+                <p>We've successfully received your quote request for ${formValues.service}.</p>
+                <p>A specialist will review the details and get back to you with a preliminary estimate within 60 minutes.</p>
+                <br>
+                <p>For urgent inquiries, please contact us via WhatsApp.</p>
+            `,
+            showConfirmButton: true,
+            confirmButtonText: 'Got it!',
+            allowOutsideClick: true,
+        });
         reset() // Clear form fields on success
       } else {
         // 3. UPDATE TO ERROR ALERT
@@ -120,19 +125,28 @@ Message: ${formValues.message || 'N/A'}
       }
     } catch (e) {
         // 4. HANDLE CATCHED ERROR ALERT
-        Swal.update({
-            icon: 'error',
-            title: 'Submission Error',
-            text: e.message || 'An unexpected error occurred. Please try again or call us.',
-            showConfirmButton: true,
-            confirmButtonText: 'Try Again',
-            allowOutsideClick: true,
-        });
+        Swal.update({
+            icon: 'error',
+            title: 'Submission Error',
+            text: e.message || 'An unexpected error occurred. Please try again or call us.',
+            showConfirmButton: true,
+            confirmButtonText: 'Try Again',
+            allowOutsideClick: true,
+        });
     }
   }
 
   return (
     <Container maxW="7xl" py={{ base: 10, md: 20 }}>
+        {/* --- SEO IMPLEMENTATION --- */}
+        <SeoHead 
+            title={seoTitle} 
+            description={seoDescription} 
+            path="contact" // Sets the canonical URL to /contact
+            ogImage="logo.jpg" 
+        />
+        {/* --- END SEO --- */}
+        
       <Heading size="2xl" mb={3}>Get a Quote for Your Project</Heading>
       <Text fontSize="lg" mb={10} color={useColorModeValue('gray.600', 'gray.400')}>
         Provide as much detail as possible (measurements, material, finish) for the fastest, most accurate pricing.
@@ -206,13 +220,14 @@ Message: ${formValues.message || 'N/A'}
             
           </SimpleGrid>
           
+          {/* --- CHANGE 2: Updated Button colorScheme from "teal" to "blue" --- */}
           <Button 
-                colorScheme="teal" 
-                type="submit" 
-                isLoading={isSubmitting} 
-                size="lg" 
-                w="full"
-            >
+                colorScheme="blue" 
+                type="submit" 
+                isLoading={isSubmitting} 
+                size="lg" 
+                w="full"
+            >
             Send Quote Request
           </Button>
 
@@ -230,32 +245,37 @@ Message: ${formValues.message || 'N/A'}
                 rounded="xl" 
                 shadow="md"
             >
+                {/* --- CHANGE 3: Changed border color to the new accentColor (blue) --- */}
                 <Heading size="md" borderBottom="2px solid" borderColor={accentColor} pb={1} mb={2}>
                     Contact Directly
                 </Heading>
                 
+                {/* --- CHANGE 4: Changed Icon color to the new accentColor (blue) --- */}
                 <HStack>
                     <Icon as={FaPhoneAlt} color={accentColor} w={5} h={5} />
                     <Link href={`tel:${COMPANY.phoneRaw}`} fontWeight="semibold">
                         {COMPANY.phone}
                     </Link>
                 </HStack>
+                {/* WhatsApp is intentionally kept as its own colorScheme */}
                 <HStack>
                     <Icon as={FaWhatsapp} color="whatsapp.500" w={5} h={5} />
                     <Link href={COMPANY.whatsappLink} isExternal fontWeight="semibold">
                         WhatsApp Us
                     </Link>
                 </HStack>
+                {/* --- CHANGE 5: Changed Icon color to the new accentColor (blue) --- */}
                 <HStack>
                     <Icon as={FaEnvelope} color={accentColor} w={5} h={5} />
                     <Link href={`mailto:${COMPANY.email}`}>
                         {COMPANY.email}
                     </Link>
                 </HStack>
+                {/* --- CHANGE 6: Changed Icon color to the new accentColor (blue) --- */}
                 <HStack align="flex-start">
                     <Icon as={FaMapMarkerAlt} color={accentColor} w={5} h={5} mt={1} />
                     <Text>
-                        Our Workshop: **Maitland, Cape Town** (Visits by appointment only).
+                        Our Workshop: <strong>Benes Street, Maitland, Cape Town</strong> .
                     </Text>
                 </HStack>
             </VStack>
@@ -293,6 +313,7 @@ Message: ${formValues.message || 'N/A'}
         <Accordion allowToggle reduceMotion maxW="5xl">
           <AccordionItem>
             <h2>
+              {/* --- CHANGE 7: Updated Accordion highlight color to the new accentColor (blue) --- */}
               <AccordionButton py={4} _expanded={{ bg: useColorModeValue('gray.50', 'gray.800'), color: accentColor }}>
                 <Box as="span" flex='1' textAlign='left' fontWeight="medium">How soon will I receive my quote?</Box>
                 <AccordionIcon />
@@ -304,17 +325,19 @@ Message: ${formValues.message || 'N/A'}
           </AccordionItem>
           <AccordionItem>
             <h2>
+              {/* --- CHANGE 8: Updated Accordion highlight color to the new accentColor (blue) --- */}
               <AccordionButton py={4} _expanded={{ bg: useColorModeValue('gray.50', 'gray.800'), color: accentColor }}>
                 <Box as="span" flex='1' textAlign='left' fontWeight="medium">Do you visit site before finalising a project?</Box>
                 <AccordionIcon />
               </AccordionButton>
-            </h2> 
+              </h2> 
             <AccordionPanel pb={4}>
                 Yes. For all installations (gates, balustrades, canopies) in the Cape Town area, we schedule a **mandatory site visit** to confirm all dimensions and installation specifics before fabrication begins.
             </AccordionPanel>
           </AccordionItem>
           <AccordionItem>
             <h2>
+              {/* --- CHANGE 9: Updated Accordion highlight color to the new accentColor (blue) --- */}
               <AccordionButton py={4} _expanded={{ bg: useColorModeValue('gray.50', 'gray.800'), color: accentColor }}>
                 <Box as="span" flex='1' textAlign='left' fontWeight="medium">What payment terms do you require?</Box>
                 <AccordionIcon />

@@ -9,9 +9,10 @@ import {
   useDisclosure,
   useColorModeValue,
   Stack,
-  Button, // Used here
+  Button,
   Text,
   Icon,
+  Image as ChakraImage, // 👈 FIX: Alias the Chakra Image component
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
@@ -28,7 +29,7 @@ const COMPANY = {
 const MotionBox = motion.create(Box);
 const MotionFlex = motion.create(Flex);
 const MotionLink = motion.create(Link);
-const MotionButton = motion.create(Button); // <--- NEW MOTION COMPONENT
+const MotionButton = motion.create(Button);
 
 // --- Navigation Links ---
 const Links = [
@@ -122,17 +123,22 @@ export default function Navbar() {
             onClick={isOpen ? onClose : onOpen}
             variant="ghost"
           />
-          <Link
-            as={RouterLink}
-            to="/"
-            fontWeight="extrabold"
-            fontSize="xl"
-            color={accentColor}
-            _hover={{ textDecoration: 'none', color: useColorModeValue('blue.700', 'blue.300') }}
-            whiteSpace="nowrap"
-          >
-            PK <Text as="span" display={{ base: 'inline', sm: 'inline' }}>Aluminium</Text>
-          </Link>
+          {/* Replaced the previous Link/Text block with the logo Image */}
+            <Link
+                as={RouterLink}
+                to="/"
+                _hover={{ textDecoration: 'none', opacity: 0.8 }} 
+                display="flex" 
+                alignItems="center"
+            >
+                <ChakraImage // 👈 FIX: Changed from Image to ChakraImage
+                    src="/logo.jpg" // Path to the logo in the public folder
+                    alt="PK Aluminium Welding Solutions Logo"
+                    height={{ base: '30px', md: '40px' }} // Height for mobile and desktop
+                    width="auto" // Maintain aspect ratio
+                    objectFit="contain"
+                />
+            </Link>
         </HStack>
 
         {/* Center: Desktop Navigation Links (NEW ALIGNMENT) */}
@@ -140,8 +146,8 @@ export default function Navbar() {
             as={'nav'} 
             spacing={4} 
             display={{ base: 'none', md: 'flex' }} 
-            flex="1" // Takes up remaining space
-            justifyContent="center" // CENTERS the links within this available space
+            flex="1" 
+            justifyContent="center" 
         >
             {Links.map((link) => (
                 <NavLink key={link.to} to={link.to}>
@@ -151,11 +157,10 @@ export default function Navbar() {
         </HStack>
 
         {/* Right Side: Call-to-Action Buttons */}
-        {/* Use a fixed width on desktop to match the left side's width for perfect centering */}
         <Flex 
             alignItems={'center'} 
             gap={3}
-            w={{ base: 'auto', md: '200px' }} // Adjusted width for alignment
+            w={{ base: 'auto', md: '200px' }} 
             justifyContent={{ base: 'flex-end', md: 'flex-end' }}
         >
           {/* Primary CTA (Call) - Minimalist Button */}
@@ -171,7 +176,7 @@ export default function Navbar() {
           />
 
           {/* Secondary CTA (Quote) - Highlighted Button */}
-          <MotionButton // <--- FIX APPLIED HERE
+          <MotionButton
             as={RouterLink}
             to="/contact"
             colorScheme="blue"
@@ -179,13 +184,12 @@ export default function Navbar() {
             whileHover={{ scale: 1.05, boxShadow: "0 4px 12px rgba(66, 153, 225, 0.5)" }}
             transition={{ duration: 0.2 }}
           >
-            Quote
+           Get a Quote
           </MotionButton>
         </Flex>
       </Flex>
 
       {/* Mobile Menu (Animated Collapse) */}
-      {/* The main content won't shift because the mobile menu is rendered *inside* the sticky nav bar */}
       {isOpen ? (
         <MotionBox
           pb={4}

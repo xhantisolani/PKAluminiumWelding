@@ -31,7 +31,7 @@ export default function Hero() {
             Precision TIG welding. Minimalist design. Coastal‑ready durability. Built in Maitland, installed across Cape Town.
           </Text>
           <Stack direction={{ base: 'column', sm: 'row' }} spacing={4}>
-            {/* CTA Button: Choose a vibrant blue from the image's cool tones */}
+            {/* CTA Button: Chose a vibrant blue from the image's cool tones */}
             <Button as={RouterLink} to="/contact" size="lg" bgColor="blue.500" _hover={{ bgColor: "blue.600" }} color="white">Get a Quote</Button>
             {/* Outline Button: White outline and text for strong contrast */}
             <Button as={RouterLink} to="/services" size="lg" variant="outline" borderColor="white" color="white" _hover={{ bgColor: "whiteAlpha.200" }}>View Services</Button>

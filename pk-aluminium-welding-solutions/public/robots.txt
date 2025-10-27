@@ -1,0 +1,6 @@
+# Telling all robots (*) they can access the entire site (/)
+User-agent: *
+Allow: /
+
+# Pointing to the location of your sitemap
+Sitemap: https://www.pkaluminiumweldingsolutions.co.za/sitemap.xml

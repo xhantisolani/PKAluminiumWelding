@@ -18,6 +18,7 @@ Bright, modern aluminium welding & fabrication website. Frontend‑only, 7 pages
 
 ## ▶️ Run locally
 ```bash
+cd pk-aluminium-welding-solutions 
 yarn install
 yarn dev
 ```

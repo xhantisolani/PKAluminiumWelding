@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import {
   Box,
   Container,
@@ -22,14 +22,17 @@ import {
     FaMapMarkerAlt, 
     FaDraftingCompass, 
     FaArrowRight, 
-    FaRulerCombined, 
-    FaWarehouse, 
+    FaCarSide, // Changed FaRulerCombined
+    FaLock, // Changed FaWarehouse
     FaHandsHelping, 
     FaQuoteLeft,
     FaRegQuestionCircle,
-    FaAward // New icon for 'Why Choose Us'
+    FaAward 
 } from 'react-icons/fa'
+
+// Import the required components
 import Hero from '../components/common/Hero'
+import SeoHead from '../components/common/SeoHead'
 
 
 const MotionBox = motion.create(Box)
@@ -50,19 +53,33 @@ const testimonials = [
 
 // --- Main Component ---
 export default function Home() {
-    useEffect(() => {
-        document.title = 'PK Aluminium | Precision Welding & Fabrication';
-    }, []);
-
+    // REMOVED: useEffect for document.title
+    
     const accentColor = useColorModeValue('blue.600', 'blue.400');
     const lightBg = useColorModeValue('white', 'gray.800');
     const darkBg = useColorModeValue('gray.50', 'gray.900');
 
-    // Services data for the snapshot section
+    // SEO Content Definition - UPDATED
+    const seoTitle = "PK Aluminium TIG Welding & Fabrication Experts | Cape Town";
+    const seoDescription = "High-grade aluminium TIG welding specialists in Cape Town. We fabricate custom cattle rails, bakkie drawer systems, security gates, and architectural structures. Coastal durability guaranteed.";
+
+    // Services data for the snapshot section - UPDATED
     const serviceSnapshot = [
-        { icon: FaRulerCombined, title: 'Architectural Balustrades', desc: 'Custom, safety-compliant railings for stairs, balconies, and decks built for the coastal climate.' },
-        { icon: FaWarehouse, title: 'Structural Canopies & Awnings', desc: 'Engineered shading solutions for commercial facades, carports, and industrial loading areas.' },
-        { icon: FaHandsHelping, title: 'Custom Vehicle Fabrication', desc: 'Bespoke aluminium canopies, toolboxes, and modifications for utility and off-road vehicles.' },
+        { 
+            icon: FaCarSide, // NEW ICON
+            title: 'Automotive & 4x4 Fabrication', 
+            desc: 'Custom cattle rails, bakkie drawer systems, roof racks, and lightweight trailersengineered for strength and off-road use.' 
+        },
+        { 
+            icon: FaLock, // NEW ICON
+            title: 'Security & Architectural', 
+            desc: 'Precision-builtgates, burglar bars (burglars), window frames, and custom structural balustrades.' 
+        },
+        { 
+            icon: FaDraftingCompass, // Re-used icon
+            title: 'Structural & Commercial', 
+            desc: 'Engineered structural canopies, walkways, commercial facades, and specialist welding services.' 
+        },
     ]
 
     // Value Props data
@@ -74,6 +91,16 @@ export default function Home() {
 
   return (
     <Box bg={darkBg}>
+
+        {/* --- SEO IMPLEMENTATION --- */}
+        <SeoHead 
+            title={seoTitle} 
+            description={seoDescription} 
+            path="" // Root path for canonical URL and to trigger LocalBusiness Schema
+            ogImage="logo.jpg" 
+        />
+        {/* --- END SEO --- */}
+
       {/* 1. Hero Section */}
       <Hero />
 
@@ -126,6 +153,7 @@ export default function Home() {
                 {/* Right: Image */}
                 <MotionBox initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.7 }}>
                     <Image
+                        // NOTE: Remember to replace this image with one of the new, real photos (e.g., Uncle Kaba's work)!
                         src="/welding.webp" // Professional, clean workshop or team shot
                         alt="PK Aluminium Workshop Team"
                         rounded="xl"
@@ -136,7 +164,7 @@ export default function Home() {
         </Container>
       </Box>
 
-      {/* 4. Core Services Snapshot (Clean Boxes, No Images) */}
+      {/* 4. Core Services Snapshot (Clean Boxes, No Images) - UPDATED CONTENT AND ICONS */}
       <Container maxW="7xl" py={{ base: 12, md: 16 }}>
         <Stack direction={{ base: 'column', md: 'row' }} justify="space-between" align="flex-end" mb={8}>
           <Box>
@@ -248,10 +276,10 @@ export default function Home() {
                     
                     <HStack align="center" spacing={3} pt={3}>
                         <Icon as={FaRegQuestionCircle} w={5} h={5} color={accentColor} />
-                        <Text fontWeight="semibold">Do you offer on-site welding?</Text>
+                        <Text fontWeight="semibold">Do you fabricate custom vehicle accessories?</Text>
                     </HStack>
                     <Text fontSize="sm" color={useColorModeValue('gray.600', 'gray.400')}>
-                        Yes, we have a mobile unit for on-site structural welding, fit-offs, and final installations across the Cape Peninsula.
+                        Yes, we specialize in lightweight, durable aluminium <strong>cattle rails, bakkie drawer systems,</strong> and <strong>roof racks</strong> designed to your specifications.
                     </Text>
                 </Stack>
                 <Button 

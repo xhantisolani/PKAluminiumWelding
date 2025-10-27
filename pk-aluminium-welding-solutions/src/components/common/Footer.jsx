@@ -29,7 +29,7 @@ const COMPANY = {
     whatsappLink: 'https://wa.me/27677822389', 
 };
 
-// Define MotionBox for animation (FIXED DEPRECATION)
+// Define MotionBox for animation
 const MotionBox = motion.create(Box);
 
 export default function Footer() {
@@ -43,8 +43,14 @@ export default function Footer() {
     animate: { scale: 1, opacity: 1, x: 0 },
   };
 
-  // **Official WhatsApp Green Color**
+  // Official WhatsApp Green Color
   const whatsappColor = '#25D366';
+
+  // Developer Credit Info
+  const DEVELOPER = {
+    name: 'Ninja Tech Holdings',
+    url: 'https://ninjatechholdings.co.za',
+  };
 
   return (
     <Box 
@@ -59,6 +65,7 @@ export default function Footer() {
         <SimpleGrid 
           columns={{ base: 1, sm: 2, md: 4 }} 
           spacing={{ base: 8, md: 10 }} 
+          // Global alignment change: Center on base, start on sm+
           textAlign={{ base: 'center', sm: 'left' }}
         >
           {/* Column 1: Company Info */}
@@ -72,6 +79,7 @@ export default function Footer() {
           </VStack>
 
           {/* Column 2: Quick Links */}
+          {/* Alignment explicitly set to flex-start on sm+ */}
           <VStack align={{ base: 'center', sm: 'flex-start' }} spacing={3}>
             <Text fontWeight="semibold" color="white">
               Sitemap
@@ -88,6 +96,7 @@ export default function Footer() {
           </VStack>
 
           {/* Column 3: Contact */}
+          {/* Alignment explicitly set to flex-start on sm+ */}
           <VStack align={{ base: 'center', sm: 'flex-start' }} spacing={3}>
             <Text fontWeight="semibold" color="white">
               Contact Us
@@ -113,13 +122,14 @@ export default function Footer() {
           </VStack>
           
           {/* Column 4: Location */}
+          {/* Alignment explicitly set to flex-start on sm+ */}
            <VStack align={{ base: 'center', sm: 'flex-start' }} spacing={3}>
             <Text fontWeight="semibold" color="white">
               Location
             </Text>
             <HStack align="flex-start">
               <Icon as={FaMapMarkerAlt} w={4} h={4} color={accentColor} mt={1} />
-              <Text maxW="150px" fontSize="sm">
+              <Text maxW="150px" fontSize="sm" textAlign={{ base: 'center', sm: 'left' }}>
                 {COMPANY.location}
               </Text>
             </HStack>
@@ -148,8 +158,25 @@ export default function Footer() {
             </Link>
           </HStack>
         </Stack>
+
+        {/* 3. DEVELOPER CREDIT BAR (NEW) */}
+        <Box w="full" pt={4}>
+          <Text fontSize="xs" textAlign="center" color="gray.600">
+            Site developed by{' '}
+            <Link 
+              href={DEVELOPER.url} 
+              isExternal 
+              fontWeight="semibold"
+              _hover={{ color: accentColor }}
+            >
+              {DEVELOPER.name}
+            </Link>
+          </Text>
+        </Box>
+
       </Container>
       
+      {/* Floating WhatsApp Button */}
       <Tooltip label={`Chat with us on WhatsApp (${COMPANY.whatsappNumber})`} placement="left" hasArrow>
         <MotionBox
           as={Link}
