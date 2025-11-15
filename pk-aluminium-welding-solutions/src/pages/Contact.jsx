@@ -1,291 +1,290 @@
-import React from 'react'
 import {
   Box,
   Container,
   Heading,
   Text,
-  SimpleGrid,
-  Stack,
-  Input,
-  Textarea,
-  Button,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  Select,
-  useToast,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
-  useColorModeValue,
   VStack,
   HStack,
+  SimpleGrid,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
+  Select,
+  Button,
+  Stack,
   Icon,
-  Link,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import { FaPhoneAlt, FaEnvelope, FaWhatsapp, FaMapMarkerAlt } from 'react-icons/fa'
-// Assuming COMPANY constants are defined elsewhere
-// import { COMPANY, WEB3FORMS } from '../utils/constants' 
-
-// --- Placeholder Constants for demo ---
-const COMPANY = {
-    location: 'Maitland, Cape Town, Western Cape',
-    phone: '021 555 1234',
-    phoneRaw: '+27215551234',
-    email: 'info@pk-aluminium.co.za',
-    whatsappLink: 'https://wa.me/27215551234',
-    // Using a generic Google Maps embed URL for Maitland as a placeholder
-    mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13239.389279093788!2d18.49070966977539!3d-33.916773300000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5b0257e174b5%3A0x6b4507567798c11e!2sMaitland%2C%20Cape%20Town!5e0!3m2!1sen!2sza!4v1689254400000!5m2!1sen!2sza",
-};
-const WEB3FORMS = {
-    ACCESS_KEY: 'YOUR_ACCESS_KEY_HERE', // Replace with actual key
-};
-// --- End Placeholder Constants ---
-
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
 
 export default function Contact() {
-  const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm()
-  const toast = useToast()
-  const accentColor = useColorModeValue('teal.500', 'teal.300');
-  const cardBg = useColorModeValue('white', 'gray.700');
-  const mapBorderColor = useColorModeValue('gray.200', 'gray.600');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm()
 
-  const onSubmit = async (formValues) => {
-    // Ensuring the message includes the key details for easy viewing in the submission email
-    const fullMessage = `
-Service Requested: ${formValues.service}
-Details: ${formValues.dimensions}
-Budget: ${formValues.budget || 'Not specified'}
-Address: ${formValues.address || 'Not specified'}
----
-Message: ${formValues.message || 'N/A'}
-    `;
-
-    const payload = {
-      access_key: WEB3FORMS.ACCESS_KEY,
-      subject: 'New Quote Request — PK Aluminium Welding Solutions',
-      from_name: formValues.name,
-      email: formValues.email,
-      phone: formValues.phone || '',
-      message: fullMessage, // Sending compiled message
-      // Include hidden fields for quick data parsing if needed
-      'Service Type': formValues.service, 
-      'Dimensions/Notes': formValues.dimensions, 
-    }
-
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-      const data = await res.json()
-      if (data && (data.success || res.ok)) {
-        toast({ title: 'Quote submitted!', description: 'We will review your request and contact you shortly.', status: 'success', duration: 5000, isClosable: true })
-        reset()
-      } else {
-        // Log error response from API for debugging
-        console.error('Web3Forms Error:', data);
-        throw new Error(data?.message || 'Submission failed. Please try again or contact us directly.')
-      }
-    } catch (e) {
-      toast({ title: 'Submission error', description: e.message, status: 'error', duration: 5000, isClosable: true })
-    }
+  const onSubmit = data => {
+    console.log(data)
+    alert('Thank you for your inquiry. We will contact you shortly.')
   }
 
   return (
-    <Container maxW="7xl" py={{ base: 10, md: 20 }}>
-      <Heading size="2xl" mb={3}>Get a Quote for Your Project</Heading>
-      <Text fontSize="lg" mb={10} color={useColorModeValue('gray.600', 'gray.400')}>
-        Provide as much detail as possible (measurements, material, finish) for the fastest, most accurate pricing.
-      </Text>
+    <Box as="main" w="100%">
+      {/* Hero */}
+      <Box bg="brand.800" color="white" py={{ base: 12, md: 16 }}>
+        <Container maxW="5xl" px={{ base: 6, md: 8 }}>
+          <VStack align="start" spacing={4}>
+            <Heading as="h1" size="2xl" color={"white"}>
+              Get a Quote for Your Project
+            </Heading>
+            <Text fontSize="lg" color="gray.100">
+              Provide as much detail as possible (measurements, material, finish) for the fastest, most accurate pricing.
+            </Text>
+          </VStack>
+        </Container>
+      </Box>
 
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={10}>
-
-        {/* --- LEFT COLUMN: QUOTE FORM (2/3 width on desktop) --- */}
-        <Box 
-          as="form" 
-          onSubmit={handleSubmit(onSubmit)} 
-          gridColumn={{ base: 'span 1', md: 'span 2' }}
-          bg={cardBg}
-          p={6}
-          rounded="xl"
-          shadow="lg"
-        >
-          <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={6} mb={6}>
-            
-            {/* Name & Email */}
-            <FormControl isInvalid={errors.name} isRequired>
-              <FormLabel>Full Name</FormLabel>
-              <Input placeholder="Your name" {...register('name', { required: 'Name is required' })} />
-              <FormErrorMessage>{errors.name && errors.name.message}</FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors.email} isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input type="email" placeholder="you@example.com" {...register('email', { required: 'Email is required' })} />
-              <FormErrorMessage>{errors.email && errors.email.message}</FormErrorMessage>
-            </FormControl>
-
-            {/* Phone & Service */}
-            <FormControl isInvalid={errors.phone}>
-              <FormLabel>Phone (for quick contact)</FormLabel>
-              <Input placeholder="+27 ..." {...register('phone')} />
-              <FormErrorMessage>{errors.phone && errors.phone.message}</FormErrorMessage>
-            </FormControl>
-            <FormControl isInvalid={errors.service} isRequired>
-              <FormLabel>Service Required</FormLabel>
-              <Select placeholder="Select service type" {...register('service', { required: 'Service is required' })}>
-                <option value="Vehicle Canopy/Rack">Vehicle Canopy/Rack</option>
-                <option value="Architectural Balustrade">Architectural Balustrade</option>
-                <option value="Gate/Security Barrier">Gate/Security Barrier</option>
-                <option value="Custom Furniture/Fixture">Custom Furniture/Fixture</option>
-                <option value="Repair/Modification">Repair/Modification</option>
-                <option value="Other">Other Custom Fabrication</option>
-              </Select>
-              <FormErrorMessage>{errors.service && errors.service.message}</FormErrorMessage>
-            </FormControl>
-            
-            {/* Dimensions/Notes */}
-            <FormControl isInvalid={errors.dimensions} isRequired gridColumn={{ base: 'span 1', sm: 'span 2' }}>
-              <FormLabel>Measurements & Details</FormLabel>
-              <Textarea 
-                placeholder="Include measurements (LxWxH), material preferences (e.g., 6061), finish (e.g., powder coat, mill finish), and structural notes."
-                {...register('dimensions', { required: 'Please provide project details/dimensions' })} 
-                minHeight="120px"
-              />
-              <FormErrorMessage>{errors.dimensions && errors.dimensions.message}</FormErrorMessage>
-            </FormControl>
-            
-            {/* Address & Budget (Optional) */}
-            <FormControl>
-              <FormLabel>Site Address (optional, for installation)</FormLabel>
-              <Input placeholder="Suburb, Cape Town" {...register('address')} />
-            </FormControl>
-            <FormControl>
-              <FormLabel>Target Budget Range (optional)</FormLabel>
-              <Input placeholder="e.g., R10,000 – R20,000" {...register('budget')} />
-            </FormControl>
-            
+      {/* Quick Contact Methods */}
+      <Box py={{ base: 12, md: 16 }} bg="brand.50">
+        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
+          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+            {[
+              {
+                icon: FaPhone,
+                title: 'Phone',
+                detail: '+1 (555) 123-4567',
+                time: 'Mon-Fri: 8am-5pm',
+              },
+              {
+                icon: FaEnvelope,
+                title: 'Email',
+                detail: 'info@pkaluminium.com',
+                time: 'We reply within 24 hours',
+              },
+              {
+                icon: FaMapMarkerAlt,
+                title: 'Address',
+                detail: '123 Industrial Way, City, State',
+                time: 'Visit our workshop',
+              },
+            ].map((method, idx) => (
+              <Box key={idx} p={6} bg="white" borderRadius="lg">
+                <HStack spacing={4} mb={4}>
+                  <Box p={3} bg="accent.500" borderRadius="md" color="white">
+                    <Icon as={method.icon} />
+                  </Box>
+                  <Heading as="h3" size="sm" color="brand.800">
+                    {method.title}
+                  </Heading>
+                </HStack>
+                <VStack align="start" spacing={1}>
+                  <Text fontWeight="600" color="brand.800">
+                    {method.detail}
+                  </Text>
+                  <Text fontSize="sm" color="brand.500">
+                    {method.time}
+                  </Text>
+                </VStack>
+              </Box>
+            ))}
           </SimpleGrid>
-          
-          <Button colorScheme="teal" type="submit" isLoading={isSubmitting} size="lg" w="full">
-            Send Quote Request
-          </Button>
+        </Container>
+      </Box>
 
-        </Box>
-
-        {/* --- RIGHT COLUMN: MAP & CONTACT INFO (1/3 width on desktop) --- */}
-        <Stack spacing={8}>
-            
-            {/* Contact Details Card */}
-            <VStack 
-                spacing={4} 
-                align="stretch" 
-                bg={cardBg} 
-                p={6} 
-                rounded="xl" 
-                shadow="md"
-            >
-                <Heading size="md" borderBottom="2px solid" borderColor={accentColor} pb={1} mb={2}>
-                    Contact Directly
+      {/* Contact Form & Info */}
+      <Box py={{ base: 16, md: 20 }} bg="white">
+        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
+          <Stack direction={{ base: 'column', md: 'row' }} spacing={12}>
+            {/* Form */}
+            <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing={6} flex={1} align="stretch">
+              <VStack spacing={2} align="start">
+                <Heading as="h2" size="lg" color="brand.800">
+                  Send us a Message
                 </Heading>
-                
-                <HStack>
-                    <Icon as={FaPhoneAlt} color={accentColor} w={5} h={5} />
-                    <Link href={`tel:${COMPANY.phoneRaw}`} fontWeight="semibold">
-                        {COMPANY.phone}
-                    </Link>
-                </HStack>
-                <HStack>
-                    <Icon as={FaWhatsapp} color="whatsapp.500" w={5} h={5} />
-                    <Link href={COMPANY.whatsappLink} isExternal fontWeight="semibold">
-                        WhatsApp Us
-                    </Link>
-                </HStack>
-                <HStack>
-                    <Icon as={FaEnvelope} color={accentColor} w={5} h={5} />
-                    <Link href={`mailto:${COMPANY.email}`}>
-                        {COMPANY.email}
-                    </Link>
-                </HStack>
-                <HStack align="flex-start">
-                    <Icon as={FaMapMarkerAlt} color={accentColor} w={5} h={5} mt={1} />
-                    <Text>
-                        Our Workshop: **Maitland, Cape Town** (Visits by appointment only).
-                    </Text>
-                </HStack>
+                <Text color="brand.600">
+                  Fill out the form below and we'll get back to you shortly.
+                </Text>
+              </VStack>
+
+              <FormControl isRequired>
+                <FormLabel color="brand.700" fontWeight="600">
+                  Name
+                </FormLabel>
+                <Input
+                  {...register('name', { required: 'Name is required' })}
+                  placeholder="Your name"
+                  borderColor="brand.200"
+                  _focus={{ borderColor: 'accent.500' }}
+                />
+                {errors.name && <Text color="red.500" fontSize="sm">{errors.name.message}</Text>}
+              </FormControl>
+
+              <FormControl isRequired>
+                <FormLabel color="brand.700" fontWeight="600">
+                  Email
+                </FormLabel>
+                <Input
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  })}
+                  placeholder="your@email.com"
+                  borderColor="brand.200"
+                  _focus={{ borderColor: 'accent.500' }}
+                />
+                {errors.email && <Text color="red.500" fontSize="sm">{errors.email.message}</Text>}
+              </FormControl>
+
+              <FormControl isRequired>
+                <FormLabel color="brand.700" fontWeight="600">
+                  Phone
+                </FormLabel>
+                <Input
+                  {...register('phone', { required: 'Phone is required' })}
+                  placeholder="+1 (555) 123-4567"
+                  borderColor="brand.200"
+                  _focus={{ borderColor: 'accent.500' }}
+                />
+                {errors.phone && <Text color="red.500" fontSize="sm">{errors.phone.message}</Text>}
+              </FormControl>
+
+              <FormControl isRequired>
+                <FormLabel color="brand.700" fontWeight="600">
+                  Service Interest
+                </FormLabel>
+                <Select
+                  {...register('service', { required: 'Please select a service' })}
+                  borderColor="brand.200"
+                  _focus={{ borderColor: 'accent.500' }}
+                >
+                  <option value="">Select a service...</option>
+                  <option value="gates">Gates & Railings</option>
+                  <option value="canopies">Canopies & Pergolas</option>
+                  <option value="doors">Doors & Frames</option>
+                  <option value="custom">Custom Fabrication</option>
+                </Select>
+                {errors.service && <Text color="red.500" fontSize="sm">{errors.service.message}</Text>}
+              </FormControl>
+
+              <FormControl isRequired>
+                <FormLabel color="brand.700" fontWeight="600">
+                  Message
+                </FormLabel>
+                <Textarea
+                  {...register('message', { required: 'Message is required' })}
+                  placeholder="Tell us about your project..."
+                  borderColor="brand.200"
+                  _focus={{ borderColor: 'accent.500' }}
+                  rows={5}
+                />
+                {errors.message && <Text color="red.500" fontSize="sm">{errors.message.message}</Text>}
+              </FormControl>
+
+              <Button
+                type="submit"
+                bg="brand.800"
+                color="white"
+                _hover={{ bg: 'brand.700' }}
+                size="lg"
+                w="100%"
+              >
+                Send Message
+              </Button>
             </VStack>
 
-            {/* Google Maps Embed */}
-            <Box 
-                w="full" 
-                h="300px" 
-                borderRadius="xl" 
-                overflow="hidden"
-                shadow="md"
-                border="1px solid"
-                borderColor={mapBorderColor}
-            >
-                <iframe
-                    src={COMPANY.mapEmbedUrl}
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="PK Aluminium Workshop Location"
-                ></iframe>
-            </Box>
+            {/* Sidebar Info */}
+            <VStack spacing={8} flex={1} align="stretch">
+              <Box p={8} bg="brand.50" borderRadius="lg">
+                <Heading as="h3" size="md" mb={6} color="brand.800">
+                  Business Hours
+                </Heading>
+                <VStack align="start" spacing={3} color="brand.600" fontSize="sm">
+                  <HStack justify="space-between" w="100%">
+                    <Text>Monday - Friday</Text>
+                    <Text fontWeight="600">8:00 AM - 5:00 PM</Text>
+                  </HStack>
+                  <HStack justify="space-between" w="100%">
+                    <Text>Saturday</Text>
+                    <Text fontWeight="600">9:00 AM - 2:00 PM</Text>
+                  </HStack>
+                  <HStack justify="space-between" w="100%">
+                    <Text>Sunday</Text>
+                    <Text fontWeight="600">Closed</Text>
+                  </HStack>
+                </VStack>
+              </Box>
 
-        </Stack>
-      </SimpleGrid>
-      
-      {/* --- QUICK FAQs --- */}
-      <Box pt={16}>
-        <Heading size="lg" mb={5} borderBottom="2px solid" borderColor={mapBorderColor} pb={2}>
-            Quote Process FAQs
-        </Heading>
-        <Accordion allowToggle reduceMotion maxW="5xl">
-          <AccordionItem>
-            <h2>
-              <AccordionButton py={4} _expanded={{ bg: useColorModeValue('gray.50', 'gray.800'), color: accentColor }}>
-                <Box as="span" flex='1' textAlign='left' fontWeight="medium">How soon will I receive my quote?</Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-                Most quotes are issued within **1–2 business days** once we have all the required measurements and project details. Complex custom work may take slightly longer.
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <h2>
-              <AccordionButton py={4} _expanded={{ bg: useColorModeValue('gray.50', 'gray.800'), color: accentColor }}>
-                <Box as="span" flex='1' textAlign='left' fontWeight="medium">Do you visit site before finalising a project?</Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-                Yes. For all installations (gates, balustrades, canopies) in the Cape Town area, we schedule a **mandatory site visit** to confirm all dimensions and installation specifics before fabrication begins.
-            </AccordionPanel>
-          </AccordionItem>
-          <AccordionItem>
-            <h2>
-              <AccordionButton py={4} _expanded={{ bg: useColorModeValue('gray.50', 'gray.800'), color: accentColor }}>
-                <Box as="span" flex='1' textAlign='left' fontWeight="medium">What payment terms do you require?</Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-                A **deposit** (typically 50%) is required to secure materials and allocate production time. The remaining balance is due only upon completion or final on-site installation.
-            </AccordionPanel>
-          </AccordionItem>
-        </Accordion>
+              <Box p={8} bg="brand.50" borderRadius="lg">
+                <Heading as="h3" size="md" mb={6} color="brand.800">
+                  Workshop Location
+                </Heading>
+                <VStack align="start" spacing={3} color="brand.600" fontSize="sm">
+                  <Text>123 Industrial Way</Text>
+                  <Text>City, State 12345</Text>
+                  <Text>Country</Text>
+                </VStack>
+              </Box>
+
+              <Box p={8} bg="accent.50" borderRadius="lg" borderLeft="4px solid" borderLeftColor="accent.500">
+                <Heading as="h3" size="md" mb={3} color="brand.800">
+                  Emergency?
+                </Heading>
+                <Text color="brand.600" fontSize="sm" mb={3}>
+                  Call us immediately for urgent requests.
+                </Text>
+                <Text fontWeight="600" color="accent.600">
+                  +1 (555) 123-4567
+                </Text>
+              </Box>
+            </VStack>
+          </Stack>
+        </Container>
       </Box>
-      
-    </Container>
+
+      {/* FAQ */}
+      <Box py={{ base: 16, md: 20 }} bg="brand.50">
+        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
+          <VStack spacing={12} align="stretch">
+            <VStack spacing={2} align="start">
+              <Heading as="h2" size="lg" color="brand.800">
+                Frequently Asked Questions
+              </Heading>
+            </VStack>
+
+            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+              {[
+                {
+                  q: 'How long does a typical project take?',
+                  a: 'Project timelines vary based on complexity and scope. Simple projects may take 1-2 weeks, while custom fabrication can take 4-8 weeks. We provide detailed timelines during the consultation.',
+                },
+                {
+                  q: 'Do you offer installation services?',
+                  a: 'Yes, professional installation is included with all our projects. Our experienced team ensures proper fitting and finish.',
+                },
+                {
+                  q: 'What materials do you use?',
+                  a: 'We work with premium aluminium alloys and high-grade structural steel. Material selection depends on your project requirements and climate conditions.',
+                },
+                {
+                  q: 'How do I get a quote?',
+                  a: 'Contact us with details of your project, or fill out the form above. We provide free consultations and detailed quotes within 24 hours.',
+                },
+              ].map((item, idx) => (
+                <Box key={idx} p={6} bg="white" borderRadius="lg">
+                  <Heading as="h4" size="sm" mb={3} color="brand.800">
+                    {item.q}
+                  </Heading>
+                  <Text color="brand.600" fontSize="sm" lineHeight="1.8">
+                    {item.a}
+                  </Text>
+                </Box>
+              ))}
+            </SimpleGrid>
+          </VStack>
+        </Container>
+      </Box>
+    </Box>
   )
 }

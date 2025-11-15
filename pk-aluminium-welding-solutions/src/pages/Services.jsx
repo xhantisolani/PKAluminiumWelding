@@ -1,356 +1,306 @@
-import React, { useEffect } from 'react'
-
 import {
-  Box,
-  Container,
-  Heading,
-  Text,
-  SimpleGrid,
-  Stack,
-  Image,
-  Icon,
-  Button,
-  Divider,
-  HStack,
-  VStack,
-  useColorModeValue,
+  Box,
+  Container,
+  Heading,
+  Text,
+  Button,
+  SimpleGrid,
+  VStack,
+  Stack,
+  HStack,
 } from '@chakra-ui/react'
-import { motion, useInView } from 'framer-motion'
 import { Link as RouterLink } from 'react-router-dom'
 
-import {
-  FaTruckPickup,
-  FaRulerCombined,
-  FaBolt,
-  FaShieldAlt,
-  FaWrench,
-  FaDraftingCompass,
-  FaArrowRight,
-  FaMapMarkerAlt,
-  FaTools,
-  FaWindowMaximize, // New icon for glass integration
-} from 'react-icons/fa'
-
-import ServiceCard from '../components/common/ServiceCard' // Assumes the updated ServiceCard is in place
-
-// Custom Motion Components (FIXED DEPRECATION)
-const MotionBox = motion.create(Box) // FIX applied
-const MotionHeading = motion.create(Heading) // FIX applied
-const MotionText = motion.create(Text) // FIX applied
-const MotionImage = motion.create(Image) // FIX applied
-
-// Data for the main service categories
-const mainServices = [
-  {
-    icon: FaRulerCombined,
-    title: 'Architectural Balustrades & Gates',
-    desc: 'Bespoke designs for balconies, staircases, and boundary control. Features include secure locking, automation options, and maintenance-free finishes.',
-  },
-  {
-    icon: FaTools,
-    title: 'Structural & Architectural Canopies',
-    desc: 'Design and fabrication of fixed awnings, carports, and complex shading structures engineered to meet local building codes.',
-  },
-  {
-    icon: FaTruckPickup,
-    title: 'Specialty Vehicle Fabrication',
-    desc: 'Lightweight, high-strength aluminium canopies, custom racks, toolboxes, and modifications for utility and off-road vehicles.',
-  },
-  {
-    icon: FaDraftingCompass,
-    title: 'Industrial & Custom Projects',
-    desc: 'From machine guards and safety rails to bespoke prototypes and retail display structures, we handle complex, one-off fabrication requests.',
-  },
-]
-
-// Data for technical advantages (used in the dedicated section)
-const techAdvantages = [
-  { icon: FaBolt, title: 'TIG Welding Precision', desc: 'Superior, contaminant-free welds with aesthetically clean, narrow beads and minimal material distortion.' },
-  { icon: FaShieldAlt, title: 'Extreme Corrosion Resistance', desc: 'Naturally weather-resistant finish, crucial for Cape Town\'s high-humidity, coastal climate.' },
-  { icon: FaWrench, title: 'Full Turnkey Installation', desc: 'We manage the project end-to-end, from shop drawings to on-site fitment and final certification.' },
-]
-
 export default function Services() {
-  useEffect(() => {
-    document.title = 'Services | PK Aluminium Welding Solutions'
-  }, [])
+  const services = [
+    {
+      title: 'Custom Welding & Fabrication',
+      description: 'Your Idea, Our Expertise',
+      details: `We start with your concept and bring it to life. Whether you have a detailed design or just a rough idea, we work with you to create exactly what you need.
 
-  const accentColor = useColorModeValue('blue.600', 'blue.300')
-  const bgColor = useColorModeValue('gray.50', 'gray.900')
+From small custom pieces to large-scale projects, we handle all your welding and fabrication needs. Our team uses state-of-the-art equipment combined with expert craftsmanship to deliver precision results every time.
 
-  const textFadeIn = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  }
+Perfect for: One-off custom projects, prototypes, replacements, or any metal fabrication job you can imagine.`,
+    },
+    {
+      title: 'Gates & Railings',
+      description: 'Security, Style, and Durability',
+      details: `We build custom gates and railings that combine functionality with professional aesthetics. Whether for residential or commercial use, our gates are built to last.
 
-  return (
-    <Box bg={bgColor} color={useColorModeValue('gray.800', 'gray.100')}>
-      
-      {/* ------------------------------------- */}
-      {/* 1. HERO SECTION: Dynamic & Detailed */}
-      {/* ------------------------------------- */}
-      <Box 
-        bg="gray.800" 
-        py={{ base: 20, md: 32 }} 
-        color="white"
-        position="relative" 
-        overflow="hidden" 
-        minH={{ base: '300px', md: '450px' }}
-      >
-        {/* Background Image Container */}
-        <Box
-          aria-hidden
-          position="absolute"
-          inset={0}
-          bgImage="url(/glass-aluminium.webp)" // IMAGE 1
-          bgPos="center"
-          bgSize="cover"
-          bgAttachment="fixed" 
-          // Dark Overlay for readability
-          _after={{
-            content: '""',
-            position: 'absolute',
-            inset: 0,
-            bgGradient: 'linear(to-b, blackAlpha.600, blackAlpha.800)', 
-          }}
-        />
+Options include:
+• Sliding gates (manual or automated)
+• Swing gates with smooth operation
+• Security gates with reinforced structures
+• Custom railings for any application
+• Decorative and functional designs
 
-        <Container maxW="7xl" position="relative" zIndex="2">
-          <MotionHeading
-            size={{ base: '2xl', md: '4xl' }}
-            mb={4}
-            {...textFadeIn}
-            transition={{ delay: 0.1 }}
-          >
-            Precision Aluminium Welding & Fabrication
-          </MotionHeading>
-          <MotionText
-            color="gray.300"
-            maxW="4xl"
-            fontSize="xl"
-            {...textFadeIn}
-            transition={{ delay: 0.3 }}
-          >
-            PK Aluminium is your specialist partner for durable, custom-engineered aluminium structures. We focus on <strong>uncompromising quality</strong> and <strong>architectural aesthetics</strong> for commercial and residential clients in the Western Cape.
-          </MotionText>
-        </Container>
-      </Box>
+Every gate is built to your specifications, finished to your standards, and installed professionally.`,
+    },
+    {
+      title: 'Canopies & Shade Structures',
+      description: 'Protection from the Elements',
+      details: `We design and build canopies, pergolas, carports, and shade structures that provide protection and enhance your space.
 
-      {/* ------------------------------------- */}
-      {/* 2. CORE SERVICE CATEGORIES (Image-Driven Grid) */}
-      {/* ------------------------------------- */}
-      <Container maxW="7xl" py={{ base: 16, md: 24 }}>
-        <MotionHeading
-          size="2xl"
-          mb={4}
-          textAlign="center"
-          color={accentColor}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          Our Fabrication Expertise
-        </MotionHeading>
-        <Text textAlign="center" mb={12} fontSize="lg" color="gray.600">
-          Focused exclusively on aluminium, we guarantee high-strength, lightweight solutions for every application.
-        </Text>
+What we build:
+• Parking canopies and carports
+• Pergolas and outdoor shade structures
+• Weather-resistant coverings
+• Custom-sized structures for any space
+• Durable finishes that withstand the elements
 
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
-          {mainServices.map((service, i) => (
-            <MotionBox
-              key={i}
-              bg="white"
-              rounded="2xl"
-              overflow="hidden"
-              shadow="xl"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ scale: 1.02, shadow: '2xl' }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-            >
-              <HStack align="start" p={8} spacing={6}>
-                <Icon as={service.icon} boxSize={10} color={accentColor} mt={1} />
-                <VStack align="start" spacing={2}>
-                  <Heading size="lg" color="gray.800">
-                    {service.title}
-                  </Heading>
-                  <Text color="gray.600">
-                    {service.desc}
-                  </Text>
-                  <Button variant="link" colorScheme="blue" rightIcon={<FaArrowRight />} size="sm" as={RouterLink} to="/Contact">
-                    Get in Touch
-                  </Button>
-                </VStack>
-              </HStack>
-            </MotionBox>
-          ))}
-        </SimpleGrid>
-      </Container>
+From concept to installation, we handle everything. All structures are engineered for durability and built to last.`,
+    },
+    {
+      title: 'Trailers & Heavy Projects',
+      description: 'Industrial-Grade Fabrication',
+      details: `We specialize in heavy-duty fabrication for trailers, industrial frames, and large-scale structural projects.
 
-      <Divider />
+Our capabilities:
+• Custom trailer design and fabrication
+• Heavy-duty structural welding
+• Industrial frameworks and supports
+• Large metal structures for any purpose
+• Commercial and industrial solutions
 
-      {/* ------------------------------------- */}
-      {/* 3. TECHNICAL ADVANTAGE (Side-by-Side Image) */}
-      {/* ------------------------------------- */}
-      <Box py={{ base: 16, md: 24 }} bg="white">
-        <Container maxW="7xl">
-          <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={12} alignItems="center">
-            <MotionBox
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8 }}
-            >
-              <Heading size="2xl" mb={4} color="gray.800">
-                The PK Aluminium Technical Edge
-              </Heading>
-              <Text fontSize="lg" mb={8} color="gray.600">
-                Aluminium demands specialized techniques. We invest in top-tier equipment and continuous training to ensure our structures are not just strong, but **visually flawless** and designed for South African conditions.
-              </Text>
+No project is too big. We have the expertise, equipment, and experience to handle serious metal work.`,
+    },
+    {
+      title: 'Machinery Repairs & Restoration',
+      description: 'Fix It Right, Fast',
+      details: `When your machinery breaks down, we fix it. We specialize in welding repairs and metal restoration for industrial equipment.
 
-              <VStack spacing={6} align="start">
-                {techAdvantages.map((item, i) => (
-                  <HStack key={i} align="start" spacing={4}>
-                    <Icon as={item.icon} w={6} h={6} color={accentColor} mt={1} />
-                    <Box>
-                      <Heading size="md" color="gray.800">{item.title}</Heading>
-                      <Text color="gray.600">{item.desc}</Text>
-                    </Box>
-                  </HStack>
-                ))}
-              </VStack>
-            </MotionBox>
+What we repair:
+• Broken machinery and equipment
+• Welded joints and structural damage
+• Worn or damaged metal components
+• Industrial equipment restoration
+• Urgent repair turnarounds
 
-            <MotionImage
-              src="/pk-welding.webp" // IMAGE 2
-              alt="A close-up shot of an aluminium TIG weld in a professional workshop setting."
-              rounded="2xl"
-              shadow="2xl"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            />
-          </SimpleGrid>
-        </Container>
-      </Box>
+We understand downtime costs. We work quickly without compromising on quality to get you back in business.`,
+    },
+    {
+      title: 'Doors, Windows & Frames',
+      description: 'Strong, Secure, Professional',
+      details: `Custom-built doors, windows, and frames in steel and aluminium for residential and commercial properties.
 
-      <Divider />
-      
-      {/* ------------------------------------- */}
-      {/* 4. SPECIAL FOCUS: ALUMINIUM & GLASS INTEGRATION (New Section for glass.webp) */}
-      {/* ------------------------------------- */}
-      <Container maxW="7xl" py={{ base: 16, md: 24 }}>
-        <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={12} alignItems="center">
-          <MotionImage
-            // ✅ IMAGE 3: glass.webp
-            src="/glass.webp" 
-            alt="A modern, custom-fabricated aluminium framed glass balustrade overlooking a coastal view."
-            rounded="2xl"
-            shadow="2xl"
-            h={{ base: '300px', md: '450px' }} 
-            w="full"
-            objectFit="cover"
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          />
-          <MotionBox
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Icon as={FaWindowMaximize} boxSize={12} color={accentColor} mb={4} />
-            <Heading size="2xl" mb={4} color="gray.800">
-              Seamless Aluminium & Glass Integration
-            </Heading>
-            <Text fontSize="lg" mb={6} color="gray.600">
-              Modern architecture frequently requires lightweight frames that pair perfectly with large glass panels. Our expertise ensures **structural integrity and flawless aesthetics** for:
-            </Text>
-            <VStack align="start" spacing={3} color="gray.700">
-              <HStack><Icon as={FaArrowRight} w={4} h={4} color={accentColor} /> <Text fontWeight="semibold">Frameless & Framed Glass Balustrades</Text></HStack>
-              <HStack><Icon as={FaArrowRight} w={4} h={4} color={accentColor} /> <Text fontWeight="semibold">Architectural Window Frames & Door Systems</Text></HStack>
-              <HStack><Icon as={FaArrowRight} w={4} h={4} color={accentColor} /> <Text fontWeight="semibold">Internal Partitioning and Office Structures</Text></HStack>
-            </VStack>
-          </MotionBox>
-        </SimpleGrid>
-      </Container>
+We create:
+• Steel entry and security doors
+• Sliding and folding door systems
+• Custom window frames
+• Aluminium and steel combinations
+• Commercial and residential solutions
 
-      <Divider />
+Every door and frame is built to specification, finished professionally, and installed with care.`,
+    },
+    {
+      title: 'Structural Steel Work',
+      description: 'Building the Backbone',
+      details: `We handle structural steel fabrication for buildings, warehouses, and industrial projects.
 
-      {/* ------------------------------------- */}
-      {/* 5. OTHER SUPPORT SERVICES (Service Card Grid) */}
-      {/* ------------------------------------- */}
-      <Container maxW="7xl" py={{ base: 16, md: 24 }}>
-        <MotionHeading
-          size="xl"
-          mb={8}
-          textAlign="center"
-          color="gray.700"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          Supporting Services
-        </MotionHeading>
+Our expertise includes:
+• Building frameworks and supports
+• Warehouse and industrial structures
+• Reinforced beams and columns
+• Staircase fabrication
+• Support structures for any application
 
-        {/* Using the ServiceCard component here */}
-        <SimpleGrid columns={{ base: 1, sm: 2, lg: 4 }} spacing={8}>
-          <ServiceCard icon={FaWrench} title="Repairs & Refinishing" desc="Restoration of existing aluminium structures, crack repair, and powder-coating preparation." delay={0.1} />
-          <ServiceCard icon={FaMapMarkerAlt} title="On-Site Welding & Fit-Offs" desc="Mobile service for structural welding, large assembly, and secure fitment across the Cape Peninsula." delay={0.2} />
-          <ServiceCard icon={FaShieldAlt} title="Security Grilles & Access" desc="Heavy-duty aluminium bars, grilles, and secure entry systems for commercial properties." delay={0.3} />
-          <ServiceCard icon={FaDraftingCompass} title="Prototyping & CAD Design" desc="Work with our in-house designers to convert concepts or rough sketches into technical shop drawings." delay={0.4} />
-        </SimpleGrid>
-      </Container>
+Engineered for safety and built with precision. All work meets industry standards and codes.`,
+    },
+    {
+      title: 'Custom Metal Art & Decor',
+      description: 'Aesthetics Meets Function',
+      details: `Beyond functional fabrication, we create custom metal art and decorative pieces that add character to any space.
 
-      {/* ------------------------------------- */}
-      {/* 6. FINAL CTA SECTION */}
-      {/* ------------------------------------- */}
-      <Box bg="blue.700" color="white" py={20} textAlign="center">
-        <Container maxW="5xl">
-          <MotionHeading
-            size="2xl"
-            mb={4}
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Ready for a Detailed Project Quote?
-          </MotionHeading>
-          <MotionText
-            fontSize="xl"
-            mb={8}
-            color="blue.100"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Provide us with your specifications and we’ll prepare a competitive, transparent quote with accurate lead times.
-          </MotionText>
-          <Button
-            as={RouterLink}
-            to="/contact"
-            size="lg"
-            bg="white"
-            color="blue.700"
-            rounded="full"
-            px={12}
-            height="55px"
-            fontSize="xl"
-            _hover={{ bg: 'gray.100', transform: 'translateY(-2px)' }}
-            shadow="2xl"
-          >
-            Request a Free Site Assessment
-          </Button>
-        </Container>
-      </Box>
-    </Box>
-  )
+We build:
+• Decorative metal screens and features
+• Custom railings with artistic design
+• Metal art installations
+• Bespoke decorative elements
+• Architectural metalwork
+
+Functionality meets aesthetics. Every piece is built to last and designed to impress.`,
+    },
+  ]
+
+  return (
+    <Box as="main" w="100%">
+      {/* Hero */}
+      <Box bg="brand.800" color="white" py={{ base: 12, md: 16 }}>
+        <Container maxW="5xl" px={{ base: 6, md: 8 }}>
+          <VStack align="start" spacing={4}>
+            <Heading as="h1" size="2xl">
+              Our Services
+            </Heading>
+            <Text fontSize="lg" color="gray.100">
+              Custom welding, fabrication, repairs, and installations. Whatever you need, we can build it.
+            </Text>
+          </VStack>
+        </Container>
+      </Box>
+
+      {/* Services List */}
+      <Box py={{ base: 16, md: 20 }} bg="white">
+        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
+          <VStack spacing={20} align="stretch">
+            {services.map((service, idx) => (
+              <Box key={idx}>
+                <Stack
+                  direction={{ base: 'column', md: idx % 2 === 0 ? 'row' : 'row-reverse' }}
+                  spacing={12}
+                  align="flex-start"
+                >
+                  {/* Text */}
+                  <VStack align="start" spacing={6} flex={1}>
+                    <Box>
+                      <Heading as="h2" size="lg" color="brand.800" mb={1}>
+                        {service.title}
+                      </Heading>
+                      <Text color="accent.500" fontSize="sm" fontWeight="600">
+                        {service.description}
+                      </Text>
+                    </Box>
+                    <Text color="brand.600" whiteSpace="pre-line" lineHeight="1.9" fontSize="sm">
+                      {service.details}
+                    </Text>
+                    <Button
+                      as={RouterLink}
+                      to="/contact"
+                      bg="accent.500"
+                      color="white"
+                      _hover={{ bg: 'accent.600' }}
+                      size="md"
+                    >
+                      Get a Quote for This Service
+                    </Button>
+                  </VStack>
+
+                  {/* Placeholder Image */}
+                  <Box
+                    flex={1}
+                    bg="brand.100"
+                    h={{ base: '300px', md: '400px' }}
+                    borderRadius="lg"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    color="brand.400"
+                    fontSize="sm"
+                    border="1px solid"
+                    borderColor="brand.200"
+                  >
+                    {service.title}
+                  </Box>
+                </Stack>
+
+                {idx < services.length - 1 && <Box h="1px" bg="brand.200" mt={16} />}
+              </Box>
+            ))}
+          </VStack>
+        </Container>
+      </Box>
+
+      {/* Process Section */}
+      <Box py={{ base: 16, md: 20 }} bg="brand.50">
+        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
+          <VStack spacing={12} align="stretch">
+            <VStack spacing={2} align="start">
+              <Heading as="h2" size="xl" color="brand.800">
+                Our Process
+              </Heading>
+              <Text color="brand.600">
+                From your idea to finished product
+              </Text>
+            </VStack>
+
+            <SimpleGrid columns={{ base: 1, md: 4 }} spacing={6}>
+              {[
+                {
+                  step: '1',
+                  title: 'Consultation',
+                  desc: 'You bring your idea. We listen, ask questions, and understand your needs.',
+                },
+                {
+                  step: '2',
+                  title: 'Design & Quote',
+                  desc: 'We create a design, provide a detailed quote, and discuss options with you.',
+                },
+                {
+                  step: '3',
+                  title: 'Fabrication',
+                  desc: 'We build it right. Our team works with precision and quality on every detail.',
+                },
+                {
+                  step: '4',
+                  title: 'Installation & Handover',
+                  desc: 'We finish strong. Professional installation and your complete satisfaction.',
+                },
+              ].map((phase, idx) => (
+                <Box key={idx} p={6} bg="white" borderRadius="lg" textAlign="center">
+                  <Box
+                    w={12}
+                    h={12}
+                    bg="accent.500"
+                    color="white"
+                    borderRadius="full"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    fontWeight="bold"
+                    fontSize="lg"
+                    mx="auto"
+                    mb={4}
+                  >
+                    {phase.step}
+                  </Box>
+                  <Heading as="h3" size="sm" color="brand.800" mb={2}>
+                    {phase.title}
+                  </Heading>
+                  <Text color="brand.600" fontSize="sm">
+                    {phase.desc}
+                  </Text>
+                </Box>
+              ))}
+            </SimpleGrid>
+          </VStack>
+        </Container>
+      </Box>
+
+      {/* CTA Section */}
+      <Box py={{ base: 16, md: 20 }} bg="blue.700" color="white">
+        <Container maxW="5xl" px={{ base: 6, md: 8 }}>
+          <VStack spacing={6} align="center" textAlign="center">
+            <Heading as="h2" size="lg" color="white">
+              Ready for a Detailed Project Quote?
+            </Heading>
+            <Text fontSize="md" color="gray.100">
+              Provide us with your specifications and we’ll prepare a competitive, transparent quote with accurate lead times.
+            </Text>
+            <HStack spacing={4}>
+              <Button
+                as={RouterLink}
+                to="/contact"
+                bg="accent.500"
+                color="white"
+                _hover={{ bg: 'accent.600' }}
+                size="lg"
+              >
+                Request a Quote
+              </Button>
+              <Button
+                as={RouterLink}
+                to="/contact"
+                variant="outline"
+                color="white"
+                borderColor="white"
+                _hover={{ bg: 'whiteAlpha.100' }}
+                size="lg"
+              >
+                Get in Touch
+              </Button>
+            </HStack>
+          </VStack>
+        </Container>
+      </Box>
+    </Box>
+  )
 }
