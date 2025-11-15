@@ -14,9 +14,21 @@ import {
   Button,
   Stack,
   Icon,
+  useColorModeValue,
+  Link,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
-import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from 'react-icons/fa'
+
+// Company Data
+const COMPANY = {
+  location: 'Maitland, Cape Town, Western Cape',
+  phone: '021 555 1234',
+  phoneRaw: '+27215551234',
+  email: 'info@pk-aluminium.co.za',
+  whatsappLink: 'https://wa.me/27677822389',
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2763.1994334795254!2d18.4798245750774!3d-33.923984421918135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5c569519b589%3A0xf5ca173f80b32347!2s4%20Benes%20St%2C%20Maitland%2C%20Cape%20Town%2C%207405!5e1!3m2!1sen!2sza!4v1761575977342!5m2!1sen!2sza",
+}
 
 export default function Contact() {
   const {
@@ -24,6 +36,9 @@ export default function Contact() {
     handleSubmit,
     formState: { errors },
   } = useForm()
+
+  const mapBorderColor = useColorModeValue('gray.200', 'gray.600')
+  const accentColor = 'accent.500'
 
   const onSubmit = data => {
     console.log(data)
@@ -96,105 +111,143 @@ export default function Contact() {
       {/* Contact Form & Info */}
       <Box py={{ base: 16, md: 20 }} bg="white">
         <Container maxW="6xl" px={{ base: 6, md: 8 }}>
-          <Stack direction={{ base: 'column', md: 'row' }} spacing={12}>
-            {/* Form */}
-            <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing={6} flex={1} align="stretch">
-              <VStack spacing={2} align="start">
-                <Heading as="h2" size="lg" color="brand.800">
-                  Send us a Message
-                </Heading>
-                <Text color="brand.600">
-                  Fill out the form below and we'll get back to you shortly.
-                </Text>
+          <Stack direction={{ base: 'column', lg: 'row' }} spacing={12}>
+            {/* Left Column: Form + Contact Directly */}
+            <VStack spacing={8} flex={1} align="stretch">
+              {/* Form */}
+              <VStack as="form" onSubmit={handleSubmit(onSubmit)} spacing={6} align="stretch">
+                <VStack spacing={2} align="start">
+                  <Heading as="h2" size="lg" color="brand.800">
+                    Send us a Message
+                  </Heading>
+                  <Text color="brand.600">
+                    Fill out the form below and we'll get back to you shortly.
+                  </Text>
+                </VStack>
+
+                <FormControl isRequired>
+                  <FormLabel color="brand.700" fontWeight="600">
+                    Name
+                  </FormLabel>
+                  <Input
+                    {...register('name', { required: 'Name is required' })}
+                    placeholder="Your name"
+                    borderColor="brand.200"
+                    _focus={{ borderColor: 'accent.500' }}
+                  />
+                  {errors.name && <Text color="red.500" fontSize="sm">{errors.name.message}</Text>}
+                </FormControl>
+
+                <FormControl isRequired>
+                  <FormLabel color="brand.700" fontWeight="600">
+                    Email
+                  </FormLabel>
+                  <Input
+                    {...register('email', {
+                      required: 'Email is required',
+                      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    })}
+                    placeholder="your@email.com"
+                    borderColor="brand.200"
+                    _focus={{ borderColor: 'accent.500' }}
+                  />
+                  {errors.email && <Text color="red.500" fontSize="sm">{errors.email.message}</Text>}
+                </FormControl>
+
+                <FormControl isRequired>
+                  <FormLabel color="brand.700" fontWeight="600">
+                    Phone
+                  </FormLabel>
+                  <Input
+                    {...register('phone', { required: 'Phone is required' })}
+                    placeholder="+1 (555) 123-4567"
+                    borderColor="brand.200"
+                    _focus={{ borderColor: 'accent.500' }}
+                  />
+                  {errors.phone && <Text color="red.500" fontSize="sm">{errors.phone.message}</Text>}
+                </FormControl>
+
+                <FormControl isRequired>
+                  <FormLabel color="brand.700" fontWeight="600">
+                    Service Interest
+                  </FormLabel>
+                  <Select
+                    {...register('service', { required: 'Please select a service' })}
+                    borderColor="brand.200"
+                    _focus={{ borderColor: 'accent.500' }}
+                  >
+                    <option value="">Select a service...</option>
+                    <option value="gates">Gates & Railings</option>
+                    <option value="canopies">Canopies & Pergolas</option>
+                    <option value="doors">Doors & Frames</option>
+                    <option value="custom">Custom Fabrication</option>
+                  </Select>
+                  {errors.service && <Text color="red.500" fontSize="sm">{errors.service.message}</Text>}
+                </FormControl>
+
+                <FormControl isRequired>
+                  <FormLabel color="brand.700" fontWeight="600">
+                    Message
+                  </FormLabel>
+                  <Textarea
+                    {...register('message', { required: 'Message is required' })}
+                    placeholder="Tell us about your project..."
+                    borderColor="brand.200"
+                    _focus={{ borderColor: 'accent.500' }}
+                    rows={5}
+                  />
+                  {errors.message && <Text color="red.500" fontSize="sm">{errors.message.message}</Text>}
+                </FormControl>
+
+                <Button
+                  type="submit"
+                  bg="brand.800"
+                  color="white"
+                  _hover={{ bg: 'brand.700' }}
+                  size="lg"
+                  w="100%"
+                >
+                  Send Message
+                </Button>
               </VStack>
 
-              <FormControl isRequired>
-                <FormLabel color="brand.700" fontWeight="600">
-                  Name
-                </FormLabel>
-                <Input
-                  {...register('name', { required: 'Name is required' })}
-                  placeholder="Your name"
-                  borderColor="brand.200"
-                  _focus={{ borderColor: 'accent.500' }}
-                />
-                {errors.name && <Text color="red.500" fontSize="sm">{errors.name.message}</Text>}
-              </FormControl>
+              {/* Contact Directly Card */}
+              <Box p={8} bg="accent.50" borderRadius="lg" borderLeft="4px solid" borderLeftColor={accentColor}>
+                <Heading size="md" borderBottom="2px solid" borderColor={accentColor} pb={1} mb={2}>
+                  Contact Directly
+                </Heading>
+                
+                <HStack mb={4}>
+                  <Icon as={FaPhoneAlt} color={accentColor} w={5} h={5} />
+                  <Link href={`tel:${COMPANY.phoneRaw}`} fontWeight="semibold">
+                    {COMPANY.phone}
+                  </Link>
+                </HStack>
 
-              <FormControl isRequired>
-                <FormLabel color="brand.700" fontWeight="600">
-                  Email
-                </FormLabel>
-                <Input
-                  {...register('email', {
-                    required: 'Email is required',
-                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                  })}
-                  placeholder="your@email.com"
-                  borderColor="brand.200"
-                  _focus={{ borderColor: 'accent.500' }}
-                />
-                {errors.email && <Text color="red.500" fontSize="sm">{errors.email.message}</Text>}
-              </FormControl>
+                <HStack mb={4}>
+                  <Icon as={FaWhatsapp} color="whatsapp.500" w={5} h={5} />
+                  <Link href={COMPANY.whatsappLink} isExternal fontWeight="semibold">
+                    WhatsApp Us
+                  </Link>
+                </HStack>
 
-              <FormControl isRequired>
-                <FormLabel color="brand.700" fontWeight="600">
-                  Phone
-                </FormLabel>
-                <Input
-                  {...register('phone', { required: 'Phone is required' })}
-                  placeholder="+1 (555) 123-4567"
-                  borderColor="brand.200"
-                  _focus={{ borderColor: 'accent.500' }}
-                />
-                {errors.phone && <Text color="red.500" fontSize="sm">{errors.phone.message}</Text>}
-              </FormControl>
+                <HStack mb={4}>
+                  <Icon as={FaEnvelope} color={accentColor} w={5} h={5} />
+                  <Link href={`mailto:${COMPANY.email}`}>
+                    {COMPANY.email}
+                  </Link>
+                </HStack>
 
-              <FormControl isRequired>
-                <FormLabel color="brand.700" fontWeight="600">
-                  Service Interest
-                </FormLabel>
-                <Select
-                  {...register('service', { required: 'Please select a service' })}
-                  borderColor="brand.200"
-                  _focus={{ borderColor: 'accent.500' }}
-                >
-                  <option value="">Select a service...</option>
-                  <option value="gates">Gates & Railings</option>
-                  <option value="canopies">Canopies & Pergolas</option>
-                  <option value="doors">Doors & Frames</option>
-                  <option value="custom">Custom Fabrication</option>
-                </Select>
-                {errors.service && <Text color="red.500" fontSize="sm">{errors.service.message}</Text>}
-              </FormControl>
-
-              <FormControl isRequired>
-                <FormLabel color="brand.700" fontWeight="600">
-                  Message
-                </FormLabel>
-                <Textarea
-                  {...register('message', { required: 'Message is required' })}
-                  placeholder="Tell us about your project..."
-                  borderColor="brand.200"
-                  _focus={{ borderColor: 'accent.500' }}
-                  rows={5}
-                />
-                {errors.message && <Text color="red.500" fontSize="sm">{errors.message.message}</Text>}
-              </FormControl>
-
-              <Button
-                type="submit"
-                bg="brand.800"
-                color="white"
-                _hover={{ bg: 'brand.700' }}
-                size="lg"
-                w="100%"
-              >
-                Send Message
-              </Button>
+                <HStack align="flex-start">
+                  <Icon as={FaMapMarkerAlt} color={accentColor} w={5} h={5} mt={1} />
+                  <Text>
+                    Our Workshop: <strong>Benes Street, Maitland, Cape Town</strong>
+                  </Text>
+                </HStack>
+              </Box>
             </VStack>
 
-            {/* Sidebar Info */}
+            {/* Right Column: Business Hours + Map + Emergency */}
             <VStack spacing={8} flex={1} align="stretch">
               <Box p={8} bg="brand.50" borderRadius="lg">
                 <Heading as="h3" size="md" mb={6} color="brand.800">
@@ -220,13 +273,39 @@ export default function Contact() {
                 <Heading as="h3" size="md" mb={6} color="brand.800">
                   Workshop Location
                 </Heading>
-                <VStack align="start" spacing={3} color="brand.600" fontSize="sm">
-                  <Text>123 Industrial Way</Text>
-                  <Text>City, State 12345</Text>
-                  <Text>Country</Text>
+                <VStack align="stretch" spacing={4}>
+                  <VStack align="start" spacing={3} color="brand.600" fontSize="sm">
+                    <Text>123 Industrial Way</Text>
+                    <Text>City, State 12345</Text>
+                    <Text>Country</Text>
+                  </VStack>
+                  
+                  {/* Google Maps Embed */}
+                  <Box 
+                    w="full" 
+                    h="300px" 
+                    borderRadius="lg" 
+                    overflow="hidden"
+                    shadow="md"
+                    border="1px solid"
+                    borderColor={mapBorderColor}
+                    mt={4}
+                  >
+                    <iframe
+                      src={COMPANY.mapEmbedUrl}
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen=""
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="PK Aluminium Workshop Location"
+                    ></iframe>
+                  </Box>
                 </VStack>
               </Box>
 
+              {/* Emergency Card */}
               <Box p={8} bg="accent.50" borderRadius="lg" borderLeft="4px solid" borderLeftColor="accent.500">
                 <Heading as="h3" size="md" mb={3} color="brand.800">
                   Emergency?
@@ -235,7 +314,7 @@ export default function Contact() {
                   Call us immediately for urgent requests.
                 </Text>
                 <Text fontWeight="600" color="accent.600">
-                  +1 (555) 123-4567
+                  +27 (555) 123-4567
                 </Text>
               </Box>
             </VStack>

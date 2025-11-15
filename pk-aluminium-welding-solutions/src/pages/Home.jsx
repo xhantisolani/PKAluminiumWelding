@@ -20,7 +20,7 @@ export default function Home() {
       <Box bg="brand.800" color="white" py={{ base: 16, md: 32 }} position="relative" overflow="hidden">
         <Container maxW="6xl" px={{ base: 6, md: 8 }}>
           <VStack align="start" spacing={8} maxW="3xl">
-            <Heading as="h1" size="3xl" lineHeight="1.3" fontWeight="900">
+            <Heading as="h1" size="3xl" lineHeight="1.3" fontWeight="900" color="white">
               Custom Welding & Fabrication Solutions
             </Heading>
             <Text fontSize="lg" color="gray.100" lineHeight="1.9">
@@ -209,14 +209,13 @@ export default function Home() {
                   <Button
                     as={RouterLink}
                     to="/contact"
-                    variant="outline"
-                    borderColor="accent.500"
-                    color="accent.500"
-                    _hover={{ bg: 'accent.50' }}
+                    bg="accent.500"
+                    color="white"
+                    _hover={{ bg: 'accent.600' }}
                     size="sm"
                     w="100%"
                   >
-                    Inquire About This Service
+                    Inquire About This Service →
                   </Button>
                 </Box>
               ))}

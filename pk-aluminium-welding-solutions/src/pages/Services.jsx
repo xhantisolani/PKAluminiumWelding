@@ -128,7 +128,7 @@ Functionality meets aesthetics. Every piece is built to last and designed to imp
       <Box bg="brand.800" color="white" py={{ base: 12, md: 16 }}>
         <Container maxW="5xl" px={{ base: 6, md: 8 }}>
           <VStack align="start" spacing={4}>
-            <Heading as="h1" size="2xl">
+            <Heading as="h1" size="2xl" color={"white"}>
               Our Services
             </Heading>
             <Text fontSize="lg" color="gray.100">

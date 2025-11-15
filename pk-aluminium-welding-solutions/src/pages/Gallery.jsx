@@ -56,7 +56,7 @@ export default function Gallery() {
       <Box bg="brand.800" color="white" py={{ base: 12, md: 16 }}>
         <Container maxW="5xl" px={{ base: 6, md: 8 }}>
           <VStack align="start" spacing={4}>
-            <Heading as="h1" size="2xl">
+            <Heading as="h1" size="2xl" color={"white"}>
               Project Gallery
             </Heading>
             <Text fontSize="lg" color="gray.100">

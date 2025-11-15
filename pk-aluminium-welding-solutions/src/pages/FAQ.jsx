@@ -84,7 +84,7 @@ export default function FAQ() {
       <Box bg="brand.600" py={{ base: 20, md: 28 }} color="white">
         <Container maxW="7xl">
           <MotionBox initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <Heading size={{ base: '2xl', md: '4xl' }} mb={4} fontWeight="extrabold">
+            <Heading size={{ base: '2xl', md: '4xl' }} mb={4} fontWeight="extrabold" color={"white"}>
               Questions Answered. Projects Simplified.
             </Heading>
             <Text fontSize="xl" color="blue.50">
