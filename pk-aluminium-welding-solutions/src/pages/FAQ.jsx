@@ -123,7 +123,7 @@ export default function FAQ() {
       {/* Hero */}
       <Box bg="brand.600" py={{ base: 20, md: 28 }} color="white">
         <Container maxW="7xl">
-          <MotionBox initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+          <MotionBox initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.2 }}>
             <Heading size={{ base: '2xl', md: '4xl' }} mb={4} fontWeight="extrabold" color={"white"}>
               Questions Answered. Projects Simplified.
             </Heading>
@@ -143,7 +143,7 @@ export default function FAQ() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
+              transition={{ delay: index * 0.05, duration: 0.2 }}
             >
               <MotionHeading 
                 size="xl" 
@@ -151,7 +151,7 @@ export default function FAQ() {
                 color={accentColor}
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.2 }}
               >
                 {category}
               </MotionHeading>

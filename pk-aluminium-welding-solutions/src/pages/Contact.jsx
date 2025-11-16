@@ -203,7 +203,10 @@ export default function Contact() {
                   <Input
                     {...register('email', {
                       required: 'Email is required',
-                      pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      pattern: {
+                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                        message: 'Please enter a valid email address'
+                      }
                     })}
                     placeholder="your@email.com"
                     borderColor="brand.200"
@@ -217,8 +220,14 @@ export default function Contact() {
                     Phone
                   </FormLabel>
                   <Input
-                    {...register('phone', { required: 'Phone is required' })}
-                    placeholder="+27 21 555 1234"
+                    {...register('phone', {
+                      required: 'Phone is required',
+                      pattern: {
+                        value: /^(\+27|0)[6-8]\d{8}$/,
+                        message: 'Please enter vsalid phone number'
+                      }
+                    })}
+                    placeholder="+27 68 592 7370"
                     borderColor="brand.200"
                     _focus={{ borderColor: 'accent.500' }}
                   />
