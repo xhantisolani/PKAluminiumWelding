@@ -12,6 +12,7 @@ import {
   Image,
 } from '@chakra-ui/react'
 import { Link as RouterLink } from 'react-router-dom'
+import { projects } from '../data/projects'
 
 export default function Home() {
   return (
@@ -362,16 +363,9 @@ export default function Home() {
             </VStack>
 
             <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={{ base: 4, md: 8 }}>
-              {[
-                { title: 'Residential Gate System', category: 'Gates', desc: 'Custom sliding gate with automation' },
-                { title: 'Commercial Canopy', category: 'Canopies', desc: 'Large-scale parking structure' },
-                { title: 'Steel Railing Installation', category: 'Railings', desc: 'Modern safety railing system' },
-                { title: 'Sliding Door Suite', category: 'Doors', desc: 'High-end residential doors' },
-                { title: 'Industrial Fabrication', category: 'Custom', desc: 'Large structural steel project' },
-                { title: 'Pergola Structure', category: 'Canopies', desc: 'Retractable outdoor pergola' },
-              ].map((project, idx) => (
+              {projects.slice(9, 15).map((project) => (
                 <Box
-                  key={idx}
+                  key={project.id}
                   cursor="pointer"
                   transition="all 0.2s"
                   _hover={{ transform: 'scale(1.02)' }}
@@ -379,7 +373,6 @@ export default function Home() {
                   to="/gallery"
                 >
                   <Box
-                    bg="brand.200"
                     h={{ base: '220px', sm: '260px', md: '280px' }}
                     borderRadius="lg"
                     mb={4}
@@ -390,17 +383,24 @@ export default function Home() {
                     fontSize={{ base: '9px', sm: '10px', md: 'sm' }}
                     border="1px solid"
                     borderColor="brand.300"
+                    position="relative"
+                    overflow="hidden"
+                    bg="brand.100"
                   >
-                    {project.title}
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      w="100%"
+                      h="100%"
+                      objectFit="cover"
+                      fallback={<Box bg="brand.200" w="100%" h="100%" display="flex" alignItems="center" justifyContent="center">{project.title}</Box>}
+                    />
                   </Box>
                   <Heading as="h3" size={{ base: 'xs', md: 'sm' }} color="brand.800" mb={1}>
                     {project.title}
                   </Heading>
                   <Text color="brand.500" fontSize={{ base: '9px', md: 'xs' }} fontWeight="600" mb={2}>
-                    {project.category}
-                  </Text>
-                  <Text color="brand.600" fontSize={{ base: '10px', md: 'sm' }}>
-                    {project.desc}
+                    {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
                   </Text>
                 </Box>
               ))}
