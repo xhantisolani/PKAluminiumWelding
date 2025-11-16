@@ -1,7 +1,6 @@
 import {
   Box,
   Container,
-  Heading,
   Text,
   HStack,
   VStack,
@@ -14,6 +13,7 @@ import {
   useDisclosure,
   IconButton,
   Divider,
+  Image,
 } from '@chakra-ui/react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
 import { HamburgerIcon, PhoneIcon } from '@chakra-ui/icons'
@@ -37,18 +37,23 @@ export default function Navbar() {
       <Container maxW="7xl" px={{ base: 3, sm: 4, md: 6, lg: 8 }}>
         <HStack justify="space-between" py={{ base: 3, md: 4 }} spacing={0}>
           {/* Logo */}
-          <Heading
+          <Box
             as={RouterLink}
             to="/"
-            size={{ base: 'sm', md: 'md' }}
-            color="brand.800"
-            _hover={{ textDecoration: 'none', color: 'accent.500' }}
+            _hover={{ textDecoration: 'none' }}
             transition="all 0.2s"
-            whiteSpace="nowrap"
-            noOfLines={1}
+            display="flex"
+            alignItems="center"
           >
-            PKAluminium
-          </Heading>
+            <Image
+              src="/assets/logo.svg"
+              alt="PKAluminium Logo"
+              h={{ base: '40px', md: '50px' }}
+              w="auto"
+              maxW={{ base: '120px', md: '160px' }}
+              objectFit="contain"
+            />
+          </Box>
 
           {/* Desktop Nav */}
           <HStack spacing={{ base: 4, lg: 8 }} display={{ base: 'none', md: 'flex' }}>

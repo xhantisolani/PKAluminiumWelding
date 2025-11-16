@@ -102,8 +102,8 @@ export default function Home() {
               <Box h="1px" w={16} bg="accent.500" />
             </VStack>
 
-            <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: 8, md: 12 }} align="center">
-              <VStack align="start" spacing={{ base: 4, md: 6 }} flex={1}>
+            <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: 8, md: 12 }} align="stretch">
+              <VStack align="start" spacing={{ base: 4, md: 6 }} flex={1} justifyContent="center">
                 <Text fontSize={{ base: 'sm', md: 'lg' }} color="brand.700" lineHeight="1.8" fontWeight="500">
                   At PKAluminium, we specialize in custom welding and fabrication based on your exact specifications. We take your ideas and bring them to life.
                 </Text>
@@ -130,8 +130,8 @@ export default function Home() {
 
               {/* Placeholder for workshop image */}
               <Box
-                flex={1}
-                bg="brand.100"
+                w={{ base: '100%', md: 'auto' }}
+                flex={{ base: 'none', md: 1 }}
                 h={{ base: '250px', sm: '300px', md: '400px' }}
                 borderRadius="lg"
                 display="flex"
@@ -141,9 +141,21 @@ export default function Home() {
                 fontSize={{ base: '10px', sm: 'xs', md: 'sm' }}
                 border="2px solid"
                 borderColor="brand.200"
-                minW={{ base: '100%', md: 'auto' }}
+                backgroundImage="url(/assets/Pictures/warehouse-welding.jpg)"
+                backgroundSize="cover"
+                backgroundPosition="center"
+                position="relative"
+                overflow="hidden"
               >
-                Workshop Image
+                <Box
+                  position="absolute"
+                  top={0}
+                  left={0}
+                  right={0}
+                  bottom={0}
+                  bg="rgba(0,0,0,0.2)"
+                  zIndex={0}
+                />
               </Box>
             </Stack>
           </VStack>
