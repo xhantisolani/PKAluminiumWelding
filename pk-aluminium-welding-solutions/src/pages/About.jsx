@@ -15,8 +15,36 @@ export default function About() {
   return (
     <Box as="main" w="100%">
       {/* Hero */}
-      <Box bg="brand.800" color="white" py={{ base: 12, md: 16 }}>
-        <Container maxW="5xl" px={{ base: 6, md: 8 }}>
+      <Box 
+        color="white" 
+        py={{ base: 12, md: 16 }}
+        position="relative" 
+        overflow="hidden"
+        _before={{
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url(/assets/Pictures/cape-town-hero-section.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(1px)',
+          zIndex: 0,
+        }}
+        _after={{
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          bg: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 1,
+        }}
+      >
+        <Container maxW="5xl" px={{ base: 6, md: 8 }} position="relative" zIndex={2}>
           <VStack align="start" spacing={4}>
             <Heading as="h1" size="2xl" color={"white"}>
                Our Story: Forged in Cape Town

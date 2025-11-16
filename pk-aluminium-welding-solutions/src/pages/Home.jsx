@@ -17,25 +17,56 @@ export default function Home() {
   return (
     <Box as="main" w="100%">
       {/* ========== HERO SECTION ========== */}
-      <Box bg="brand.800" color="white" py={{ base: 16, md: 32 }} position="relative" overflow="hidden">
-        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
-          <VStack align="start" spacing={8} maxW="3xl">
-            <Heading as="h1" size="3xl" lineHeight="1.3" fontWeight="900" color="white">
+      <Box  
+        color="white" 
+        py={{ base: 12, sm: 16, md: 32 }} 
+        position="relative" 
+        overflow="hidden"
+        _before={{
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url(/assets/Pictures/landing-page-2.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(1px)',
+          zIndex: 0,
+        }}
+        _after={{
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          bg: 'rgba(0, 0, 0, 0.4)',
+          zIndex: 1,
+        }}
+      >
+        <Container maxW="6xl" px={{ base: 4, sm: 5, md: 8 }} position="relative" zIndex={2}>
+          <VStack align="start" spacing={{ base: 5, md: 8 }} maxW="100%">
+            <Heading as="h1" size={{ base: 'lg', sm: 'xl', md: '3xl' }} lineHeight="1.2" fontWeight="900" color="white">
               Custom Welding & Fabrication Solutions
             </Heading>
-            <Text fontSize="lg" color="gray.100" lineHeight="1.9">
+            <Text fontSize={{ base: 'sm', sm: 'base', md: 'lg' }} color="gray.100" lineHeight="1.8">
               From custom quotes to complete fabrication, repairs, and installations. We weld, fabricate, and fix whatever you need — gates, canopies, trailers, machinery repairs, and more. No job too big or too small.
             </Text>
-            <HStack spacing={4} pt={4}>
+            <VStack spacing={{ base: 2, sm: 3, md: 4 }} pt={{ base: 2, md: 4 }} w={{ base: '100%', sm: 'auto' }} align={{ base: 'stretch', sm: 'flex-start' }}>
               <Button
                 as={RouterLink}
                 to="/contact"
                 bg="accent.500"
                 color="white"
-                _hover={{ bg: 'accent.600' }}
-                size="lg"
-                px={8}
+                _hover={{ bg: 'accent.600', transform: 'translateY(-2px)' }}
+                size={{ base: 'md', md: 'lg' }}
+                px={{ base: 6, md: 8 }}
                 fontWeight="600"
+                w={{ base: '100%', sm: 'auto' }}
+                fontSize={{ base: 'sm', md: 'base' }}
+                transition="all 0.2s"
               >
                 Request a Quote
               </Button>
@@ -45,44 +76,47 @@ export default function Home() {
                 variant="outline"
                 color="white"
                 borderColor="white"
-                _hover={{ bg: 'whiteAlpha.100' }}
-                size="lg"
-                px={8}
+                _hover={{ bg: 'whiteAlpha.100', transform: 'translateY(-2px)' }}
+                size={{ base: 'md', md: 'lg' }}
+                px={{ base: 6, md: 8 }}
                 fontWeight="600"
+                w={{ base: '100%', sm: 'auto' }}
+                fontSize={{ base: 'sm', md: 'base' }}
+                transition="all 0.2s"
               >
                 View Portfolio
               </Button>
-            </HStack>
+            </VStack>
           </VStack>
         </Container>
       </Box>
 
       {/* ========== WHO WE ARE SECTION ========== */}
-      <Box py={{ base: 16, md: 24 }} bg="white">
-        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
-          <VStack spacing={12} align="stretch">
-            <VStack spacing={3} align="start">
-              <Heading as="h2" size="2xl" color="brand.800">
+      <Box py={{ base: 12, sm: 16, md: 24 }} bg="white">
+        <Container maxW="6xl" px={{ base: 4, sm: 5, md: 8 }}>
+          <VStack spacing={{ base: 8, md: 12 }} align="stretch">
+            <VStack spacing={{ base: 2, md: 3 }} align="start">
+              <Heading as="h2" size={{ base: 'md', md: '2xl' }} color="brand.800">
                 Who We Are
               </Heading>
               <Box h="1px" w={16} bg="accent.500" />
             </VStack>
 
-            <Stack direction={{ base: 'column', md: 'row' }} spacing={12} align="center">
-              <VStack align="start" spacing={6} flex={1}>
-                <Text fontSize="lg" color="brand.700" lineHeight="2" fontWeight="500">
+            <Stack direction={{ base: 'column', md: 'row' }} spacing={{ base: 8, md: 12 }} align="center">
+              <VStack align="start" spacing={{ base: 4, md: 6 }} flex={1}>
+                <Text fontSize={{ base: 'sm', md: 'lg' }} color="brand.700" lineHeight="1.8" fontWeight="500">
                   At PKAluminium, we specialize in custom welding and fabrication based on your exact specifications. We take your ideas and bring them to life.
                 </Text>
-                <Text color="brand.600" lineHeight="1.9">
+                <Text color="brand.600" lineHeight="1.8" fontSize={{ base: 'xs', md: 'sm' }}>
                   Whether you need a one-off custom piece, a full-scale fabrication project, machinery repairs, or anything in between, we handle it all. We work with steel and aluminium to create gates, canopies, trailers, structural work, and more. If it can be welded or fabricated, we can do it.
                 </Text>
 
-                <VStack align="start" spacing={4} pt={4}>
+                <VStack align="start" spacing={{ base: 3, md: 4 }} pt={{ base: 2, md: 4 }}>
                   <Box>
-                    <Heading as="h3" size="sm" color="brand.800" mb={2}>
+                    <Heading as="h3" size={{ base: 'xs', md: 'sm' }} color="brand.800" mb={2}>
                       What We Do
                     </Heading>
-                    <VStack align="start" spacing={2} color="brand.600" fontSize="sm">
+                    <VStack align="start" spacing={{ base: 1, md: 2 }} color="brand.600" fontSize={{ base: '10px', sm: 'xs', md: 'sm' }}>
                       <Text>• Custom welding fabrication to your exact specifications</Text>
                       <Text>• Gates, railings, and security structures</Text>
                       <Text>• Canopies, pergolas, and shade structures</Text>
@@ -98,15 +132,16 @@ export default function Home() {
               <Box
                 flex={1}
                 bg="brand.100"
-                h={{ base: '300px', md: '400px' }}
+                h={{ base: '250px', sm: '300px', md: '400px' }}
                 borderRadius="lg"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
                 color="brand.400"
-                fontSize="sm"
+                fontSize={{ base: '10px', sm: 'xs', md: 'sm' }}
                 border="2px solid"
                 borderColor="brand.200"
+                minW={{ base: '100%', md: 'auto' }}
               >
                 Workshop Image
               </Box>
@@ -301,20 +336,20 @@ export default function Home() {
       </Box>
 
       {/* ========== FEATURED PROJECTS SECTION ========== */}
-      <Box py={{ base: 16, md: 24 }} bg="brand.50">
-        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
-          <VStack spacing={12} align="stretch">
-            <VStack spacing={3} align="start">
-              <Heading as="h2" size="2xl" color="brand.800">
+      <Box py={{ base: 12, sm: 16, md: 24 }} bg="brand.50">
+        <Container maxW="6xl" px={{ base: 4, sm: 5, md: 8 }}>
+          <VStack spacing={{ base: 8, md: 12 }} align="stretch">
+            <VStack spacing={{ base: 2, md: 3 }} align="start">
+              <Heading as="h2" size={{ base: 'md', md: '2xl' }} color="brand.800">
                 Featured Projects
               </Heading>
               <Box h="1px" w={16} bg="accent.500" />
-              <Text color="brand.600" fontSize="md">
+              <Text color="brand.600" fontSize={{ base: 'xs', md: 'md' }}>
                 A selection of completed fabrication projects
               </Text>
             </VStack>
 
-            <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+            <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={{ base: 4, md: 8 }}>
               {[
                 { title: 'Residential Gate System', category: 'Gates', desc: 'Custom sliding gate with automation' },
                 { title: 'Commercial Canopy', category: 'Canopies', desc: 'Large-scale parking structure' },
@@ -333,26 +368,26 @@ export default function Home() {
                 >
                   <Box
                     bg="brand.200"
-                    h="280px"
+                    h={{ base: '220px', sm: '260px', md: '280px' }}
                     borderRadius="lg"
                     mb={4}
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
                     color="brand.400"
-                    fontSize="sm"
+                    fontSize={{ base: '9px', sm: '10px', md: 'sm' }}
                     border="1px solid"
                     borderColor="brand.300"
                   >
                     {project.title}
                   </Box>
-                  <Heading as="h3" size="sm" color="brand.800" mb={1}>
+                  <Heading as="h3" size={{ base: 'xs', md: 'sm' }} color="brand.800" mb={1}>
                     {project.title}
                   </Heading>
-                  <Text color="brand.500" fontSize="xs" fontWeight="600" mb={2}>
+                  <Text color="brand.500" fontSize={{ base: '9px', md: 'xs' }} fontWeight="600" mb={2}>
                     {project.category}
                   </Text>
-                  <Text color="brand.600" fontSize="sm">
+                  <Text color="brand.600" fontSize={{ base: '10px', md: 'sm' }}>
                     {project.desc}
                   </Text>
                 </Box>
@@ -485,25 +520,28 @@ export default function Home() {
       </Box>
 
       {/* ========== CALL TO ACTION SECTION ========== */}
-      <Box py={{ base: 16, md: 24 }} bg="brand.800" color="white">
-        <Container maxW="5xl" px={{ base: 6, md: 8 }}>
-          <VStack spacing={8} align="center" textAlign="center">
-            <Heading as="h2" size="2xl" lineHeight="1.3">
+      <Box py={{ base: 12, sm: 16, md: 24 }} bg="brand.800" color="white">
+        <Container maxW="5xl" px={{ base: 4, sm: 5, md: 8 }}>
+          <VStack spacing={{ base: 4, md: 8 }} align="center" textAlign="center">
+            <Heading as="h2" size={{ base: 'md', md: '2xl' }} lineHeight="1.2" color={"white"}>
               Ready to Bring Your Project to Life?
             </Heading>
-            <Text fontSize="lg" color="gray.100" lineHeight="1.8">
+            <Text fontSize={{ base: 'sm', md: 'lg' }} color="gray.100" lineHeight="1.8">
               Contact our team today for a free consultation and detailed quote. Let's discuss how PKAluminium can help you achieve your fabrication goals.
             </Text>
-            <HStack spacing={4} pt={4}>
+            <VStack spacing={{ base: 2, sm: 3, md: 4 }} pt={{ base: 2, md: 4 }} w={{ base: '100%', sm: 'auto' }} align={{ base: 'stretch', sm: 'center' }}>
               <Button
                 as={RouterLink}
                 to="/contact"
                 bg="accent.500"
                 color="white"
-                _hover={{ bg: 'accent.600' }}
-                size="lg"
-                px={8}
+                _hover={{ bg: 'accent.600', transform: 'translateY(-2px)' }}
+                size={{ base: 'md', md: 'lg' }}
+                px={{ base: 6, md: 8 }}
                 fontWeight="600"
+                w={{ base: '100%', sm: 'auto' }}
+                fontSize={{ base: 'sm', md: 'base' }}
+                transition="all 0.2s"
               >
                 Request a Quote
               </Button>
@@ -513,14 +551,17 @@ export default function Home() {
                 variant="outline"
                 color="white"
                 borderColor="white"
-                _hover={{ bg: 'whiteAlpha.100' }}
-                size="lg"
-                px={8}
+                _hover={{ bg: 'whiteAlpha.100', transform: 'translateY(-2px)' }}
+                size={{ base: 'md', md: 'lg' }}
+                px={{ base: 6, md: 8 }}
                 fontWeight="600"
+                w={{ base: '100%', sm: 'auto' }}
+                fontSize={{ base: 'sm', md: 'base' }}
+                transition="all 0.2s"
               >
                 Contact Us
               </Button>
-            </HStack>
+            </VStack>
           </VStack>
         </Container>
       </Box>

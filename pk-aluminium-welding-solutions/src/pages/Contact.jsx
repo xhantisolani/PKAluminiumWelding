@@ -77,7 +77,8 @@ export default function Contact() {
           isClosable: true,
           position: 'top-right',
         })
-        reset()
+        reset() // Clear all form fields
+        setIsSubmitting(false)
       } else {
         toast({
           title: 'Error',
@@ -87,6 +88,7 @@ export default function Contact() {
           isClosable: true,
           position: 'top-right',
         })
+        setIsSubmitting(false)
       }
     } catch (error) {
       console.error('Form submission error:', error)
@@ -98,7 +100,6 @@ export default function Contact() {
         isClosable: true,
         position: 'top-right',
       })
-    } finally {
       setIsSubmitting(false)
     }
   }
@@ -106,8 +107,36 @@ export default function Contact() {
   return (
     <Box as="main" w="100%">
       {/* Hero */}
-      <Box bg="brand.800" color="white" py={{ base: 12, md: 16 }}>
-        <Container maxW="5xl" px={{ base: 6, md: 8 }}>
+      <Box 
+        color="white" 
+        py={{ base: 12, md: 16 }}
+        position="relative" 
+        overflow="hidden"
+        _before={{
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url(/assets/Pictures/contact.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(1px)',
+          zIndex: 0,
+        }}
+        _after={{
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          bg: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 1,
+        }}
+      >
+       <Container maxW="5xl" px={{ base: 6, md: 8 }} position="relative" zIndex={2}>
           <VStack align="start" spacing={4}>
             <Heading as="h1" size="2xl" color={"white"}>
               Get a Quote for Your Project
@@ -120,9 +149,9 @@ export default function Contact() {
       </Box>
 
       {/* Quick Contact Methods */}
-      <Box py={{ base: 12, md: 16 }} bg="brand.50">
-        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
-          <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+      <Box py={{ base: 12, sm: 16, md: 16 }} bg="brand.50">
+        <Container maxW="6xl" px={{ base: 4, sm: 5, md: 8 }}>
+          <SimpleGrid columns={{ base: 1, sm: 2, md: 3 }} spacing={{ base: 4, md: 8 }}>
             {[
               {
                 icon: FaPhone,
@@ -143,20 +172,20 @@ export default function Contact() {
                 time: 'Visit our workshop',
               },
             ].map((method, idx) => (
-              <Box key={idx} p={6} bg="white" borderRadius="lg">
-                <HStack spacing={4} mb={4}>
-                  <Box p={3} bg="accent.500" borderRadius="md" color="white">
-                    <Icon as={method.icon} />
+              <Box key={idx} p={{ base: 4, md: 6 }} bg="white" borderRadius="lg">
+                <HStack spacing={{ base: 2, md: 4 }} mb={4}>
+                  <Box p={{ base: 2, md: 3 }} bg="accent.500" borderRadius="md" color="white" minW="fit-content">
+                    <Icon as={method.icon} w={{ base: 3, md: 4 }} h={{ base: 3, md: 4 }} />
                   </Box>
-                  <Heading as="h3" size="sm" color="brand.800">
+                  <Heading as="h3" size={{ base: 'xs', md: 'sm' }} color="brand.800">
                     {method.title}
                   </Heading>
                 </HStack>
                 <VStack align="start" spacing={1}>
-                  <Text fontWeight="600" color="brand.800">
+                  <Text fontWeight="600" color="brand.800" fontSize={{ base: 'xs', md: 'sm' }}>
                     {method.detail}
                   </Text>
-                  <Text fontSize="sm" color="brand.500">
+                  <Text fontSize={{ base: 'xs', md: 'sm' }} color="brand.500">
                     {method.time}
                   </Text>
                 </VStack>
@@ -167,9 +196,9 @@ export default function Contact() {
       </Box>
 
       {/* Contact Form & Info */}
-      <Box py={{ base: 16, md: 20 }} bg="white">
-        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
-          <Stack direction={{ base: 'column', lg: 'row' }} spacing={12}>
+      <Box py={{ base: 12, sm: 16, md: 20 }} bg="white">
+        <Container maxW="6xl" px={{ base: 4, sm: 5, md: 8 }}>
+          <Stack direction={{ base: 'column', lg: 'row' }} spacing={{ base: 8, lg: 12 }}>
             {/* Left Column: Form + Contact Directly */}
             <VStack spacing={8} flex={1} align="stretch">
               {/* Form */}
@@ -397,16 +426,16 @@ export default function Contact() {
       </Box>
 
       {/* FAQ */}
-      <Box py={{ base: 16, md: 20 }} bg="brand.50">
-        <Container maxW="6xl" px={{ base: 6, md: 8 }}>
-          <VStack spacing={12} align="stretch">
-            <VStack spacing={2} align="start">
-              <Heading as="h2" size="lg" color="brand.800">
+      <Box py={{ base: 12, sm: 16, md: 20 }} bg="brand.50">
+        <Container maxW="6xl" px={{ base: 4, sm: 5, md: 8 }}>
+          <VStack spacing={{ base: 8, md: 12 }} align="stretch">
+            <VStack spacing={{ base: 1, md: 2 }} align="start">
+              <Heading as="h2" size={{ base: 'md', md: 'lg' }} color="brand.800">
                 Frequently Asked Questions
               </Heading>
             </VStack>
 
-            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 4, md: 8 }}>
               {[
                 {
                   q: 'How long does a typical project take?',
@@ -425,11 +454,11 @@ export default function Contact() {
                   a: 'Contact us with details of your project, or fill out the form above. We provide free consultations and detailed quotes within 24 hours.',
                 },
               ].map((item, idx) => (
-                <Box key={idx} p={6} bg="white" borderRadius="lg">
-                  <Heading as="h4" size="sm" mb={3} color="brand.800">
+                <Box key={idx} p={{ base: 4, md: 6 }} bg="white" borderRadius="lg">
+                  <Heading as="h4" size={{ base: 'xs', md: 'sm' }} mb={3} color="brand.800">
                     {item.q}
                   </Heading>
-                  <Text color="brand.600" fontSize="sm" lineHeight="1.8">
+                  <Text color="brand.600" fontSize={{ base: 'xs', md: 'sm' }} lineHeight="1.8">
                     {item.a}
                   </Text>
                 </Box>

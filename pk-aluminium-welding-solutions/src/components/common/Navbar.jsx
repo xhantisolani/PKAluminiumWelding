@@ -34,21 +34,24 @@ export default function Navbar() {
 
   return (
     <Box bg="white" borderBottom="1px solid" borderColor="brand.200" position="sticky" top={0} zIndex={100}>
-      <Container maxW="6xl" px={{ base: 4, md: 8 }}>
-        <HStack justify="space-between" py={4} spacing={0}>
+      <Container maxW="7xl" px={{ base: 3, sm: 4, md: 6, lg: 8 }}>
+        <HStack justify="space-between" py={{ base: 3, md: 4 }} spacing={0}>
           {/* Logo */}
           <Heading
             as={RouterLink}
             to="/"
-            size="md"
+            size={{ base: 'sm', md: 'md' }}
             color="brand.800"
-            _hover={{ textDecoration: 'none' }}
+            _hover={{ textDecoration: 'none', color: 'accent.500' }}
+            transition="all 0.2s"
+            whiteSpace="nowrap"
+            noOfLines={1}
           >
             PKAluminium
           </Heading>
 
           {/* Desktop Nav */}
-          <HStack spacing={8} display={{ base: 'none', md: 'flex' }}>
+          <HStack spacing={{ base: 4, lg: 8 }} display={{ base: 'none', md: 'flex' }}>
             {navLinks.map(link => {
               const isActive = location.pathname === link.path || (link.path === '/' && location.pathname === '/')
               return (
@@ -57,7 +60,7 @@ export default function Navbar() {
                   as={RouterLink}
                   to={link.path}
                   color={isActive ? 'accent.500' : 'brand.600'}
-                  fontSize="sm"
+                  fontSize={{ base: 'xs', lg: 'sm' }}
                   fontWeight={isActive ? '600' : '500'}
                   _hover={{ color: 'accent.500' }}
                   transition="all 0.2s"
@@ -74,15 +77,16 @@ export default function Navbar() {
           </HStack>
 
           {/* Desktop CTA */}
-          <HStack spacing={3} display={{ base: 'none', md: 'flex' }}>
+          <HStack spacing={{ base: 2, lg: 3 }} display={{ base: 'none', md: 'flex' }}>
             <Button
               as={RouterLink}
               to="/contact"
               bg="accent.500"
               color="white"
-              _hover={{ bg: 'accent.600' }}
-              size="sm"
-              px={6}
+              _hover={{ bg: 'accent.600', transform: 'translateY(-1px)' }}
+              size={{ base: 'xs', lg: 'sm' }}
+              px={{ base: 4, lg: 6 }}
+              transition="all 0.2s"
             >
               Contact
             </Button>
@@ -91,10 +95,11 @@ export default function Navbar() {
               href={`tel:${COMPANY.phoneRaw}`}
               bg="brand.800"
               color="white"
-              _hover={{ bg: 'brand.900' }}
-              size="sm"
-              px={6}
+              _hover={{ bg: 'brand.900', transform: 'translateY(-1px)' }}
+              size={{ base: 'xs', lg: 'sm' }}
+              px={{ base: 4, lg: 6 }}
               leftIcon={<PhoneIcon />}
+              transition="all 0.2s"
             >
               Call
             </Button>
@@ -107,14 +112,16 @@ export default function Navbar() {
             onClick={onOpen}
             variant="ghost"
             color="brand.800"
+            size="md"
+            _hover={{ bg: 'brand.50' }}
           />
 
           <Drawer isOpen={isOpen} placement="right" onClose={onClose}>
             <DrawerOverlay />
             <DrawerContent bg="white">
-              <DrawerCloseButton />
-              <DrawerBody pt={8}>
-                <VStack spacing={6} align="stretch">
+              <DrawerCloseButton size="lg" />
+              <DrawerBody pt={{ base: 6, sm: 8 }}>
+                <VStack spacing={{ base: 4, sm: 6 }} align="stretch">
                   {navLinks.map(link => {
                     const isActive = location.pathname === link.path || (link.path === '/' && location.pathname === '/')
                     return (
@@ -123,21 +130,23 @@ export default function Navbar() {
                         as={RouterLink}
                         to={link.path}
                         color={isActive ? 'accent.500' : 'brand.600'}
-                        fontSize="sm"
+                        fontSize={{ base: 'sm', sm: 'md' }}
                         fontWeight={isActive ? '600' : '500'}
                         onClick={onClose}
                         cursor="pointer"
                         py={2}
-                        _hover={{ color: 'accent.500' }}
+                        px={2}
+                        _hover={{ color: 'accent.500', bg: 'brand.50' }}
                         borderLeft={isActive ? '3px solid' : 'none'}
                         borderLeftColor={isActive ? 'accent.500' : 'transparent'}
-                        pl={isActive ? 2 : 0}
+                        pl={isActive ? 3 : 2}
+                        transition="all 0.2s"
                       >
                         {link.name}
                       </Box>
                     )
                   })}
-                  <Divider />
+                  <Divider my={2} />
                   <Button
                     as={RouterLink}
                     to="/contact"
@@ -146,6 +155,8 @@ export default function Navbar() {
                     _hover={{ bg: 'accent.600' }}
                     w="100%"
                     onClick={onClose}
+                    size={{ base: 'sm', sm: 'md' }}
+                    py={2}
                   >
                     Get a Quote
                   </Button>
@@ -154,9 +165,11 @@ export default function Navbar() {
                     href={`tel:${COMPANY.phoneRaw}`}
                     bg="brand.800"
                     color="white"
-                    _hover={{ bg: 'brand.600' }}
+                    _hover={{ bg: 'brand.900' }}
                     w="100%"
                     leftIcon={<PhoneIcon />}
+                    size={{ base: 'sm', sm: 'md' }}
+                    py={2}
                   >
                     Call Us
                   </Button>

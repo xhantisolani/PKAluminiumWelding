@@ -75,22 +75,35 @@ export default function Testimonials() {
     <Box bg={sectionBg}>
       {/* Hero Section */}
       <Box 
-        bg="brand.600" 
-        py={{ base: 20, md: 28 }} 
-        color="white"
-        position="relative" 
-        overflow="hidden"
-      >
-        <Box
-          aria-hidden
-          position="absolute"
-          inset={0}
-          bgImage="url(/welding.webp)"
-          bgPos="center"
-          bgSize="cover"
-          opacity={0.2}
-        />
-        <Container maxW="7xl" position="relative" zIndex="2">
+              color="white" 
+              py={{ base: 12, md: 16 }}
+              position="relative" 
+              overflow="hidden"
+              _before={{
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                backgroundImage: 'url(/assets/Pictures/contact.jpg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                filter: 'blur(1px)',
+                zIndex: 0,
+              }}
+              _after={{
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                bg: 'rgba(0, 0, 0, 0.5)',
+                zIndex: 1,
+              }}
+            >
+        <Container maxW="7xl" position="relative" zIndex={2}>
           <MotionHeading
             size={{ base: '2xl', md: '4xl' }}
             mb={4}

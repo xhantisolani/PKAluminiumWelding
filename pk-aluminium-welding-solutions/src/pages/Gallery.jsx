@@ -16,6 +16,7 @@ import {
   Image,
 } from '@chakra-ui/react'
 import { useState } from 'react'
+import { Link as RouterLink } from 'react-router-dom'
 
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -53,14 +54,42 @@ export default function Gallery() {
   return (
     <Box as="main" w="100%">
       {/* Hero */}
-      <Box bg="brand.800" color="white" py={{ base: 12, md: 16 }}>
-        <Container maxW="5xl" px={{ base: 6, md: 8 }}>
+      <Box 
+        color="white" 
+        py={{ base: 12, md: 16 }}
+        position="relative" 
+        overflow="hidden"
+        _before={{
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundImage: 'url(/assets/Pictures/gallery-hero-section.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          filter: 'blur(1px)',
+          zIndex: 0,
+        }}
+        _after={{
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          bg: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 1,
+        }}
+      >
+        <Container maxW="5xl" px={{ base: 6, md: 8 }} position="relative" zIndex={2}>
           <VStack align="start" spacing={4}>
             <Heading as="h1" size="2xl" color={"white"}>
               Project Gallery
             </Heading>
             <Text fontSize="lg" color="gray.100">
-              A selection of completed fabrication projects
+              A curated showcase of completed fabrication projects demonstrating our precision, skill, and industry-level welding standards
             </Text>
           </VStack>
         </Container>
@@ -130,6 +159,31 @@ export default function Gallery() {
               </Box>
             ))}
           </SimpleGrid>
+        </Container>
+      </Box>
+       {/* ========== FINAL CTA SECTION ========== */}
+      <Box py={{ base: 16, md: 24 }} bg="accent.600" color="white">
+        <Container maxW="5xl" px={{ base: 6, md: 8 }}>
+          <VStack spacing={8} align="center" textAlign="center">
+            <Heading as="h2" size="xl" lineHeight="1.3" color="white">
+              Ready to Work with a Company You Trust?
+            </Heading>
+            <Text fontSize="lg" color="gray.100" lineHeight="1.8">
+              We're centrally located in Maitland, serving all of Cape Town. Let's discuss your project.
+            </Text>
+           <Button
+              as={RouterLink}
+              to="/contact"
+              size="lg"
+              bg="white"
+              color="accent.600"
+              rounded="lg"
+              px={10}
+              _hover={{ bg: 'gray.100', transform: 'translateY(-2px)' }}
+              >
+                Get in Touch
+              </Button>
+          </VStack>
         </Container>
       </Box>
 
