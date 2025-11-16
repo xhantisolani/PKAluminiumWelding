@@ -16,7 +16,8 @@ import {
   Divider,
 } from '@chakra-ui/react'
 import { Link as RouterLink, useLocation } from 'react-router-dom'
-import { HamburgerIcon } from '@chakra-ui/icons'
+import { HamburgerIcon, PhoneIcon } from '@chakra-ui/icons'
+import { COMPANY } from '../../utils/constants'
 
 export default function Navbar() {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -85,6 +86,18 @@ export default function Navbar() {
             >
               Contact
             </Button>
+            <Button
+              as="a"
+              href={`tel:${COMPANY.phoneRaw}`}
+              bg="brand.800"
+              color="white"
+              _hover={{ bg: 'brand.900' }}
+              size="sm"
+              px={6}
+              leftIcon={<PhoneIcon />}
+            >
+              Call
+            </Button>
           </HStack>
 
           {/* Mobile Menu */}
@@ -135,6 +148,17 @@ export default function Navbar() {
                     onClick={onClose}
                   >
                     Get a Quote
+                  </Button>
+                  <Button
+                    as="a"
+                    href={`tel:${COMPANY.phoneRaw}`}
+                    bg="brand.800"
+                    color="white"
+                    _hover={{ bg: 'brand.900' }}
+                    w="100%"
+                    leftIcon={<PhoneIcon />}
+                  >
+                    Call Us
                   </Button>
                 </VStack>
               </DrawerBody>

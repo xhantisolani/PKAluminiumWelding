@@ -127,7 +127,7 @@ export default function Contact() {
               {
                 icon: FaPhone,
                 title: 'Phone',
-                detail: '+27 21 555 1234',
+                detail: '+27 68 592 7370',
                 time: 'Mon-Fri: 8am-5pm',
               },
               {
