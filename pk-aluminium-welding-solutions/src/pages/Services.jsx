@@ -266,7 +266,7 @@ Functionality meets aesthetics. Every piece is built to last and designed to imp
       </Box>
 
       {/* CTA Section */}
-      <Box py={{ base: 16, md: 20 }} bg="blue.700" color="white">
+      <Box py={{ base: 16, md: 20 }} bg="accent.600" color="white">
         <Container maxW="5xl" px={{ base: 6, md: 8 }}>
           <VStack spacing={6} align="center" textAlign="center">
             <Heading as="h2" size="lg" color="white">
@@ -276,28 +276,34 @@ Functionality meets aesthetics. Every piece is built to last and designed to imp
               Provide us with your specifications and we’ll prepare a competitive, transparent quote with accurate lead times.
             </Text>
             <HStack spacing={4}>
-              <Button
-                as={RouterLink}
-                to="/contact"
-                bg="accent.500"
-                color="white"
-                _hover={{ bg: 'accent.600' }}
-                size="lg"
+             <Button
+              as={RouterLink}
+              to="/contact"
+              size="lg"
+              bg="white"
+              color="accent.600"
+              borderColor="white"
+              rounded="lg"
+              px={10}
+              _hover={{ bg: 'gray.100', transform: 'translateY(-2px)' }}
               >
-                Request a Quote
-              </Button>
-              <Button
-                as={RouterLink}
-                to="/contact"
-                variant="outline"
-                color="white"
-                borderColor="white"
-                _hover={{ bg: 'whiteAlpha.100' }}
-                size="lg"
+              Request a Quote
+            </Button>
+              
+            <Button
+              as={RouterLink}
+              to="/contact"
+              size="lg"
+              bg="brand.800"
+              color="white"
+              rounded="lg"
+              px={10}
+              variant="outline"
+              _hover={{ bg: 'brand.600', transform: 'translateY(-2px)' }}
               >
-                Get in Touch
-              </Button>
-            </HStack>
+              Get in Touch
+           </Button>
+          </HStack>
           </VStack>
         </Container>
       </Box>

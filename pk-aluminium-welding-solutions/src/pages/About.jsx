@@ -235,7 +235,7 @@ export default function About() {
       </Box>
 
       {/* ========== FINAL CTA SECTION ========== */}
-      <Box py={{ base: 16, md: 24 }} bg="blue.700" color="white">
+      <Box py={{ base: 16, md: 24 }} bg="accent.600" color="white">
         <Container maxW="5xl" px={{ base: 6, md: 8 }}>
           <VStack spacing={8} align="center" textAlign="center">
             <Heading as="h2" size="xl" lineHeight="1.3" color="white">
@@ -244,18 +244,18 @@ export default function About() {
             <Text fontSize="lg" color="gray.100" lineHeight="1.8">
               We're centrally located in Maitland, serving all of Cape Town. Let's discuss your project.
             </Text>
-            <Button
+           <Button
               as={RouterLink}
               to="/contact"
-              bg="accent.500"
-              color="white"
-              _hover={{ bg: 'accent.600' }}
               size="lg"
-              px={8}
-              fontWeight="600"
-            >
-              Get in Touch
-            </Button>
+              bg="white"
+              color="accent.600"
+              rounded="lg"
+              px={10}
+              _hover={{ bg: 'gray.100', transform: 'translateY(-2px)' }}
+              >
+                Get in Touch
+              </Button>
           </VStack>
         </Container>
       </Box>

@@ -154,7 +154,7 @@ export default function Navbar() {
                     href={`tel:${COMPANY.phoneRaw}`}
                     bg="brand.800"
                     color="white"
-                    _hover={{ bg: 'brand.900' }}
+                    _hover={{ bg: 'brand.600' }}
                     w="100%"
                     leftIcon={<PhoneIcon />}
                   >
