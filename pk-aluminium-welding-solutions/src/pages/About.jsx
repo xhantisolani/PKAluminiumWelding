@@ -75,19 +75,34 @@ export default function About() {
               </Text>
             </VStack>
 
-            <Box
-              flex={1}
-              bg="brand.100"
-              h={{ base: '300px', md: '400px' }}
-              borderRadius="lg"
-              display="flex"
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Text color="brand.400" fontSize="sm">
-                Workshop Image
-              </Text>
-            </Box>
+             <Box
+                w={{ base: '100%', md: 'auto' }}
+                flex={{ base: 'none', md: 1 }}
+                h={{ base: '250px', sm: '300px', md: '400px' }}
+                borderRadius="lg"
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                color="brand.400"
+                fontSize={{ base: '10px', sm: 'xs', md: 'sm' }}
+                border="2px solid"
+                borderColor="brand.200"
+                backgroundImage="url(/assets/Pictures/mr-kabab-in-the-warehouse.jpg)"
+                backgroundSize="cover"
+                backgroundPosition="center"
+                position="relative"
+                overflow="hidden"
+              >
+                <Box
+                  position="absolute"
+                  top={0}
+                  left={0}
+                  right={0}
+                  bottom={0}
+                  bg="rgba(0,0,0,0.2)"
+                  zIndex={0}
+                />
+              </Box>
           </Stack>
         </Container>
       </Box>

@@ -35,23 +35,24 @@ export default function Navbar() {
   return (
     <Box bg="white" borderBottom="1px solid" borderColor="brand.200" position="sticky" top={0} zIndex={100}>
       <Container maxW="7xl" px={{ base: 3, sm: 4, md: 6, lg: 8 }}>
-        <HStack justify="space-between" py={{ base: 3, md: 4 }} spacing={0}>
+        <HStack justify="space-between" py={{ base: 1, md: 1 }} spacing={0}>
           {/* Logo */}
           <Box
             as={RouterLink}
             to="/"
-            _hover={{ textDecoration: 'none' }}
+            _hover={{ textDecoration: 'none', transform: 'scale(1.05)' }}
             transition="all 0.2s"
             display="flex"
             alignItems="center"
+            justifyContent="center"
           >
-            <Image
-              src="/assets/logo.svg"
-              alt="PKAluminium Logo"
-              h={{ base: '40px', md: '50px' }}
-              w="auto"
-              maxW={{ base: '120px', md: '160px' }}
-              objectFit="contain"
+            <Box
+              w={{ base: '70px', sm: '75px', md: '90px', lg: '80px' }}
+              h={{ base: '70px', sm: '75px', md: '90px', lg: '80px' }}
+              backgroundImage="url(/assets/logo.svg)"
+              backgroundSize="contain"
+              backgroundRepeat="no-repeat"
+              backgroundPosition="center"
             />
           </Box>
 

@@ -17,29 +17,13 @@ import {
 } from '@chakra-ui/react'
 import { useState } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import { projects } from '../data/projects'
+import { categories } from '../data/categories'
 
 export default function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [selectedProject, setSelectedProject] = useState(null)
   const { isOpen, onOpen, onClose } = useDisclosure()
-
-  const projects = [
-    { id: 1, title: 'Residential Gate', category: 'gates', image: 'Gates' },
-    { id: 2, title: 'Commercial Canopy', category: 'canopies', image: 'Canopies' },
-    { id: 3, title: 'Steel Railing', category: 'railings', image: 'Railings' },
-    { id: 4, title: 'Sliding Doors', category: 'doors', image: 'Doors' },
-    { id: 5, title: 'Industrial Frame', category: 'industrial', image: 'Industrial' },
-    { id: 6, title: 'Custom Pergola', category: 'canopies', image: 'Pergola' },
-  ]
-
-  const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'gates', label: 'Gates' },
-    { id: 'canopies', label: 'Canopies' },
-    { id: 'doors', label: 'Doors' },
-    { id: 'railings', label: 'Railings' },
-    { id: 'industrial', label: 'Industrial' },
-  ]
 
   const filtered =
     selectedCategory === 'all'
@@ -137,19 +121,30 @@ export default function Gallery() {
                 _hover={{ opacity: 0.8 }}
                 onClick={() => handleProjectClick(project)}
               >
-                <Box
-                  bg="brand.100"
+                <Image
+                  src={project.image}
+                  alt={project.title}
                   h="300px"
+                  w="100%"
+                  objectFit="cover"
                   borderRadius="lg"
                   mb={4}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Text color="brand.400" fontSize="sm">
-                    {project.image}
-                  </Text>
-                </Box>
+                  fallback={
+                    <Box
+                      bg="brand.100"
+                      h="300px"
+                      borderRadius="lg"
+                      mb={4}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Text color="brand.400" fontSize="sm">
+                        Image not available
+                      </Text>
+                    </Box>
+                  }
+                />
                 <Heading as="h3" size="sm" color="brand.800" mb={1}>
                   {project.title}
                 </Heading>
@@ -195,17 +190,27 @@ export default function Gallery() {
           <ModalBody py={6}>
             {selectedProject && (
               <VStack spacing={4} align="start">
-                <Box
-                  bg="brand.100"
+                <Image
+                  src={selectedProject.image}
+                  alt={selectedProject.title}
                   w="100%"
                   h="400px"
+                  objectFit="cover"
                   borderRadius="lg"
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Text color="brand.400">{selectedProject.image}</Text>
-                </Box>
+                  fallback={
+                    <Box
+                      bg="brand.100"
+                      w="100%"
+                      h="400px"
+                      borderRadius="lg"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                    >
+                      <Text color="brand.400">Image not available</Text>
+                    </Box>
+                  }
+                />
                 <Heading as="h2" size="lg" color="brand.800">
                   {selectedProject.title}
                 </Heading>
