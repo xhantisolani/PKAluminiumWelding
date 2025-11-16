@@ -16,17 +16,20 @@ import {
   Icon,
   useColorModeValue,
   Link,
+  Spinner,
+  useToast,
 } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from 'react-icons/fa'
 
 // Company Data
 const COMPANY = {
-  location: 'Maitland, Cape Town, Western Cape',
-  phone: '021 555 1234',
-  phoneRaw: '+27215551234',
-  email: 'info@pk-aluminium.co.za',
-  whatsappLink: 'https://wa.me/27677822389',
+  location: '4 Benes Street, Maitland, Cape Town, Western Cape',
+  phone: '+27 68 592 7370',
+  phoneRaw: '+27685927370',
+  email: 'info@pkaluminiumweldingsolutions.co.za',
+  whatsappLink: 'https://wa.me/27685927370',
   mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2763.1994334795254!2d18.4798245750774!3d-33.923984421918135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc5c569519b589%3A0xf5ca173f80b32347!2s4%20Benes%20St%2C%20Maitland%2C%20Cape%20Town%2C%207405!5e1!3m2!1sen!2sza!4v1761575977342!5m2!1sen!2sza",
 }
 
@@ -35,14 +38,69 @@ export default function Contact() {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm()
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const toast = useToast()
   const mapBorderColor = useColorModeValue('gray.200', 'gray.600')
   const accentColor = 'accent.500'
 
-  const onSubmit = data => {
-    console.log(data)
-    alert('Thank you for your inquiry. We will contact you shortly.')
+  const onSubmit = async (data) => {
+    setIsSubmitting(true)
+    try {
+      const formData = new FormData()
+      
+      // Add form fields
+      formData.append('name', data.name)
+      formData.append('email', data.email)
+      formData.append('phone', data.phone)
+      formData.append('service', data.service)
+      formData.append('message', data.message)
+      
+      // Web3Form access key - Replace with your actual key
+      formData.append('access_key', import.meta.env.VITE_WEB3FORM_KEY || 'YOUR_WEB3FORM_ACCESS_KEY')
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        toast({
+          title: 'Success!',
+          description: 'Thank you for your inquiry. We will contact you shortly.',
+          status: 'success',
+          duration: 5,
+          isClosable: true,
+          position: 'top-right',
+        })
+        reset()
+      } else {
+        toast({
+          title: 'Error',
+          description: result.message || 'Failed to submit form. Please try again.',
+          status: 'error',
+          duration: 5,
+          isClosable: true,
+          position: 'top-right',
+        })
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      toast({
+        title: 'Error',
+        description: 'An error occurred while submitting the form. Please try again.',
+        status: 'error',
+        duration: 5,
+        isClosable: true,
+        position: 'top-right',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -69,19 +127,19 @@ export default function Contact() {
               {
                 icon: FaPhone,
                 title: 'Phone',
-                detail: '+1 (555) 123-4567',
+                detail: '+27 21 555 1234',
                 time: 'Mon-Fri: 8am-5pm',
               },
               {
                 icon: FaEnvelope,
                 title: 'Email',
-                detail: 'info@pkaluminium.com',
+                detail: 'info@pkaluminiumweldingsolutions.co.za',
                 time: 'We reply within 24 hours',
               },
               {
                 icon: FaMapMarkerAlt,
                 title: 'Address',
-                detail: '123 Industrial Way, City, State',
+                detail: '4 Benes Street, Maitland, Cape Town, Western Cape, 7405, South Africa',
                 time: 'Visit our workshop',
               },
             ].map((method, idx) => (
@@ -160,7 +218,7 @@ export default function Contact() {
                   </FormLabel>
                   <Input
                     {...register('phone', { required: 'Phone is required' })}
-                    placeholder="+1 (555) 123-4567"
+                    placeholder="+27 21 555 1234"
                     borderColor="brand.200"
                     _focus={{ borderColor: 'accent.500' }}
                   />
@@ -203,11 +261,18 @@ export default function Contact() {
                   type="submit"
                   bg="brand.800"
                   color="white"
-                  _hover={{ bg: 'brand.700' }}
+                  _hover={{ bg: 'brand.700', transform: 'translateY(-2px)' }}
+                  _active={{ transform: 'translateY(0)' }}
                   size="lg"
                   w="100%"
+                  isLoading={isSubmitting}
+                  loadingText="Sending..."
+                  isDisabled={isSubmitting}
+                  onClick={handleSubmit(onSubmit)}
+                  transition="all 0.2s"
+                  boxShadow={isSubmitting ? '0 0 0 3px rgba(0, 0, 0, 0.1)' : 'md'}
                 >
-                  Send Message
+                  {!isSubmitting && 'Send'}
                 </Button>
               </VStack>
 
@@ -241,7 +306,7 @@ export default function Contact() {
                 <HStack align="flex-start">
                   <Icon as={FaMapMarkerAlt} color={accentColor} w={5} h={5} mt={1} />
                   <Text>
-                    Our Workshop: <strong>Benes Street, Maitland, Cape Town</strong>
+                    Our Workshop: <strong>4 Benes Street, Maitland, Cape Town</strong>
                   </Text>
                 </HStack>
               </Box>
@@ -275,9 +340,9 @@ export default function Contact() {
                 </Heading>
                 <VStack align="stretch" spacing={4}>
                   <VStack align="start" spacing={3} color="brand.600" fontSize="sm">
-                    <Text>123 Industrial Way</Text>
-                    <Text>City, State 12345</Text>
-                    <Text>Country</Text>
+                    <Text>4 Benes Street, Maitland</Text>
+                    <Text>Cape Town, Western Cape, 7405</Text>
+                    <Text>South Africa</Text>
                   </VStack>
                   
                   {/* Google Maps Embed */}
@@ -313,9 +378,9 @@ export default function Contact() {
                 <Text color="brand.600" fontSize="sm" mb={3}>
                   Call us immediately for urgent requests.
                 </Text>
-                <Text fontWeight="600" color="accent.600">
-                  +27 (555) 123-4567
-                </Text>
+                 <Link href={`tel:${COMPANY.phoneRaw}`} fontWeight="semibold">
+                        {COMPANY.phone}
+                 </Link>
               </Box>
             </VStack>
           </Stack>

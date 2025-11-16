@@ -20,12 +20,12 @@ import { motion } from 'framer-motion'
 
 // Company Data
 const COMPANY = {
-  location: 'Maitland, Cape Town, Western Cape',
-  phone: '021 555 1234',
-  phoneRaw: '+27215551234',
-  email: 'info@pk-aluminium.co.za',
-  whatsappNumber: '+27677822389',
-  whatsappLink: 'https://wa.me/27677822389',
+  location: '4 Benes Street, Maitland, Cape Town, Western Cape, 7405, South Africa',
+  phone: '+27 68 592 7370',
+  phoneRaw: '+27685927370',
+  email: 'info@pkaluminiumweldingsolutions.co.za',
+  whatsappNumber: '+27685927370',
+  whatsappLink: 'https://wa.me/27685927370',
 }
 
 // Developer Credit

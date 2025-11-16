@@ -18,11 +18,11 @@ export default function About() {
       <Box bg="brand.800" color="white" py={{ base: 12, md: 16 }}>
         <Container maxW="5xl" px={{ base: 6, md: 8 }}>
           <VStack align="start" spacing={4}>
-            <Heading as="h1" size="2xl">
-              About PKAluminium
+            <Heading as="h1" size="2xl" color={"white"}>
+               Our Story: Forged in Cape Town
             </Heading>
             <Text fontSize="lg" color="gray.100">
-              Quality fabrication solutions with decades of experience
+             We are more than fabricators; we are artisans building the future of aluminium structures on a foundation of <strong>precision, reliability, and local expertise.</strong>
             </Text>
           </VStack>
         </Container>
@@ -139,6 +139,7 @@ export default function About() {
                   <Text>• Quality finishes and treatments</Text>
                   <Text>• Machinery repair and restoration</Text>
                   <Text>• Professional installation service</Text>
+                  <Text>• Custom aluminium fabrication</Text>
                 </VStack>
               </VStack>
             </SimpleGrid>
@@ -234,7 +235,7 @@ export default function About() {
       </Box>
 
       {/* ========== FINAL CTA SECTION ========== */}
-      <Box py={{ base: 16, md: 24 }} bg="brand.800" color="white">
+      <Box py={{ base: 16, md: 24 }} bg="blue.700" color="white">
         <Container maxW="5xl" px={{ base: 6, md: 8 }}>
           <VStack spacing={8} align="center" textAlign="center">
             <Heading as="h2" size="xl" lineHeight="1.3" color="white">
